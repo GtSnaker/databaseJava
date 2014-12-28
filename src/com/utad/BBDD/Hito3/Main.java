@@ -38,6 +38,7 @@ public class Main {
 					case 5:
 						break;
 					case 6:
+						System.out.println("caso 6");
 						break;
 					case 7:
 						System.out.println("Buenas noches, bendisiones :)");
