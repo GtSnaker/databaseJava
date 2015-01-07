@@ -37,6 +37,10 @@ public class DbConnection {
 	public java.sql.Connection getConnection(){
 		return connection;
 	}
+
+	public void close() {
+		connection = null;
+	}
 	
 //	public static void main (String[] args) throws ClassNotFoundException, SQLException{
 //		new DbConnection();
