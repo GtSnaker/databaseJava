@@ -33,14 +33,15 @@ public class Menu {
 				} else {
 					switch (opcion) {
 					case 1:
-						verJugador(connection);
+						VerTablas.verJugador(connection);
 						break;
 					case 2:
-						crearJugador(connection);
 						break;
 					case 3:
+						CrearTablas.crearJugador(connection);		
 						break;
 					case 4:
+						BorrarTablas.borrarJugador(connection);
 						break;
 					case 5:
 						break;
@@ -50,6 +51,7 @@ public class Menu {
 					case 7:
 						System.out.println("Buenas noches, bendisiones :)");
 						opcion = 0;
+						connection.close();
 						break;
 					}
 				}
@@ -57,54 +59,5 @@ public class Menu {
 				System.out.println("Introduce un numero por favor...");
 			}
 		}
-	}
-
-	
-	public static void verJugador(DbConnection connection) throws ClassNotFoundException, SQLException {
-		JugadorDAO miJugadorDAO = new JugadorDAO();
-		JugadorVO miJugador;
-		ArrayList<JugadorVO> jugadores = miJugadorDAO.verTablaJugador(connection);
-		if (jugadores.size() > 0) {
-			int numero = 0;
-			for (int i = 0; i < jugadores.size(); i++) {
-				numero++;
-				miJugador = jugadores.get(i);
-				System.out.println("Id: " + miJugador.getId() + ", Nombre: " + miJugador.getNombre() + ", Apellido: " + miJugador.getApellido() + ", Edad: "+ miJugador.getEdad() + ", Pais: "+ miJugador.getPais() + ", Mail: "+ miJugador.getMail() + ", Battletag: "+ miJugador.getBattletag() + ", Password: **********" + ", Liga: "+ miJugador.getLiga());
-			}
-			System.out.println("");
-		} else {
-			JOptionPane.showMessageDialog(null, "Actualmente no "
-					+ "existen registros de personas", "INFORMACIÓN",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
-	
-	public static void crearJugador(DbConnection connection) throws ClassNotFoundException, SQLException {
-		JugadorDAO miJugadorDAO = new JugadorDAO();
-		JugadorVO miJugadorVO = new JugadorVO();
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("Introduce el id");
-		miJugadorVO.setId(Integer.parseInt(sc.nextLine()));
-		System.out.println("Introduce el nombre");
-		miJugadorVO.setNombre(sc.nextLine());
-		System.out.println("Introduce el apellido");
-		miJugadorVO.setApellido(sc.nextLine());
-		System.out.println("Introduce la edad");
-		Date miDate = new Date(1991, 1, 4);
-		miJugadorVO.setEdad(miDate);
-		System.out.println("Introduce el pais");
-		miJugadorVO.setPais(sc.nextLine());
-		System.out.println("Introduce el mail");
-		miJugadorVO.setMail(sc.nextLine());
-		System.out.println("Introduce el battletag");
-		miJugadorVO.setBattletag(sc.nextLine());
-		System.out.println("Introduce el password");
-		miJugadorVO.setPassword(sc.nextLine());
-		System.out.println("Introduce la liga");
-		miJugadorVO.setLiga(Integer.parseInt(sc.nextLine()));
-		miJugadorDAO.registrar(miJugadorVO, connection);
-	}
-	
-	
+	}	
 }

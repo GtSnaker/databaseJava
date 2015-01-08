@@ -2,27 +2,30 @@ package com.utad.BBDD.Hito3;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-public class JugadorDAO {
+/**
+ * clase cuyos metodos añaden, borran, ven y modifican tuplas de la tabla jugador
+ * 
+ * @see JugadorVO
+ * 
+ */
 
+public class JugadorDAO {
+	
+	/**
+	 * permite insertar una tupla en la tabla jugador
+	 * 
+	 * @param JugadorVO fila
+	 * @param DbConnection connection
+	 * @return void
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void registrar(JugadorVO fila, DbConnection connection)
 			throws SQLException, ClassNotFoundException {
-		// PreparedStatement statement = connection
-		// .getConnection()
-		// .prepareStatement(
-		// "insert into jugador values (-1, \"null\", \"null\", null, \"null\", \"null\", \"null\", \"null\", -1)");
-		// statement.setInt(1, fila.getId());
-		// statement.setString(2, fila.getNombre());
-		// statement.setString(3, fila.getApellido());
-		// statement.setDate(4, fila.getEdad());
-		// statement.setString(5, fila.getPais());
-		// statement.setString(6, fila.getMail());
-		// statement.setString(7, fila.getBattletag());
-		// statement.setString(8, fila.getPassword());
-		// statement.setInt(9, fila.getLiga());
-		// statement.close();
 		try {
 			Statement statement = connection.getConnection().createStatement();
 			statement.executeUpdate("INSERT INTO jugador VALUES ('"
@@ -35,7 +38,7 @@ public class JugadorDAO {
 					"Se ha registrado Exitosamente", "Información",
 					JOptionPane.INFORMATION_MESSAGE);
 			statement.close();
-			connection.close();
+//			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null,
@@ -44,15 +47,14 @@ public class JugadorDAO {
 	}
 
 	/**
-	 * permite consultar el empleado asociado al documento enviado como
-	 * parametro
+	 * permite consultar todas las tuplas de la tabla jugador
 	 * 
-	 * @param documento
-	 * @return
+	 * @param DbConnection connection
+	 * @return ArrayList<JugadorVO>
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<JugadorVO> verTablaJugador(DbConnection connection)
+	public ArrayList<JugadorVO> ver(DbConnection connection)
 			throws SQLException, ClassNotFoundException {
 		ArrayList<JugadorVO> jugadores = new ArrayList<JugadorVO>();
 		try {
@@ -68,12 +70,33 @@ public class JugadorDAO {
 			}
 			res.close();
 			statement.close();
-			connection.close();
+//			connection.close();
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
 					"no se pudo consultar la Persona\n" + e);
 		}
 		return jugadores;
+	}
+	
+	/**
+	 * permite borrar una tupla en la tabla jugador
+	 * 
+	 * @param DbConnection connection
+	 * @param int id
+	 * @return void
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public void borrar(DbConnection connection, int id)
+			throws SQLException, ClassNotFoundException {
+		try {
+			Statement statement = connection.getConnection().createStatement();
+			statement.executeUpdate("DELETE FROM jugador WHERE id = " + id);
+			statement.close();
+//			connection.close();
+		} catch (SQLException e) {
+			System.out.println("Error" + e);
+		}
 	}
 }

@@ -41,20 +41,4 @@ public class DbConnection {
 	public void close() {
 		connection = null;
 	}
-	
-//	public static void main (String[] args) throws ClassNotFoundException, SQLException{
-//		new DbConnection();
-//		try {
-//			Class.forName("com.mysql.jdbc.Driver");
-//			java.sql.Connection connection = DriverManager.getConnection(url, login, password);
-//			
-//			if(connection != null){
-//				System.out.println("Connection to db: " + db + " on...");
-//			}
-//		} catch (ClassNotFoundException | SQLException e){
-//			e.printStackTrace();
-//		}
-//		
-//		
-//	}
 }
