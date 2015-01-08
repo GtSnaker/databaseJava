@@ -1,92 +1,86 @@
 package com.utad.BBDD.Hito3;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.ResultSetMetaData;
+
 /**
- * clase cuyos metodos añaden, borran, ven y modifican tuplas de la tabla
- * jugador
+ * clase cuyos metodos añaden, borran, ven y modifican tuplas de la tabla liga
  * 
- * @see JugadorVO
+ * @see LigaVO
  * 
  */
-public class JugadorDAO {
-
+public class LigaDAO {
+	
 	/**
-	 * permite insertar una tupla en la tabla jugador
+	 * permite insertar una tupla en la tabla liga
 	 * 
-	 * @param JugadorVO
-	 *            fila
-	 * @param DbConnection
-	 *            connection
+	 * @param LigaVO fila
+	 * @param DbConnection connection
 	 * @return void
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public void registrar(JugadorVO fila, DbConnection connection)
+	public void registrar(LigaVO fila, DbConnection connection)
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("INSERT INTO jugador VALUES ('"
-					+ fila.getId() + "', '" + fila.getNombre() + "', '"
-					+ fila.getApellido() + "', '" + fila.getEdad() + "', '"
-					+ fila.getPais() + "', '" + fila.getMail() + "', '"
-					+ fila.getBattletag() + "', '" + fila.getPassword()
-					+ "', '" + fila.getLiga() + "')");
+			statement.executeUpdate("INSERT INTO liga VALUES ('"
+					+ fila.getId() + "', '" + fila.getLiga() + "', '"
+					+ fila.getIcono() + "')");
 			JOptionPane.showMessageDialog(null,
 					"Se ha registrado Exitosamente", "Información",
 					JOptionPane.INFORMATION_MESSAGE);
 			statement.close();
-			// connection.close();
+//			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null,
-					"No se pudo registrar al jugador");
+					"No se pudo registrar la liga");
 		}
 	}
-
+	
 	/**
-	 * permite consultar todas las tuplas de la tabla jugador
+	 * permite consultar todas las tuplas de la tabla liga
 	 * 
-	 * @param DbConnection
-	 *            connection
-	 * @return ArrayList<JugadorVO>
+	 * @param DbConnection connection
+	 * @return ArrayList<LigaVO>
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<JugadorVO> ver(DbConnection connection)
+	public ArrayList<LigaVO> ver(DbConnection connection)
 			throws SQLException, ClassNotFoundException {
-		ArrayList<JugadorVO> jugadores = new ArrayList<JugadorVO>();
+		ArrayList<LigaVO> ligas = new ArrayList<LigaVO>();
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			ResultSet res = statement.executeQuery("SELECT * FROM jugador");
+			ResultSet res = statement.executeQuery("SELECT * FROM liga");
 
 			while (res.next()) {
-				jugadores.add(new JugadorVO(res.getInt("id"), res
-						.getString("nombre"), res.getString("apellido"), res
-						.getDate("edad"), res.getString("pais"), res
-						.getString("mail"), res.getString("battletag"), res
-						.getString("password"), res.getInt("liga")));
+				String nombreLiga =  res.getString("nombre");
+				Liga miLiga = Liga.valueOf(nombreLiga);
+				ligas.add(new LigaVO(res.getInt("id"), miLiga,  res.getString("icono")));
 			}
 			res.close();
 			statement.close();
-			// connection.close();
+//			connection.close();
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
-					"no se pudo consultar la Persona\n" + e);
+					"no se pudo consultar la liga\n" + e);
 		}
-		return jugadores;
+		return ligas;
 	}
-
+	
 	/**
-	 * permite borrar una tupla en la tabla jugador
+	 * permite borrar una tupla en la tabla liga
 	 * 
-	 * @param DbConnection
-	 *            connection
+	 * @param DbConnection connection
 	 * @param int id
 	 * @return void
 	 * @throws SQLException
@@ -96,15 +90,16 @@ public class JugadorDAO {
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("DELETE FROM jugador WHERE id = " + id);
+			statement.executeUpdate("DELETE FROM liga WHERE id = " + id);
 			statement.close();
 //			connection.close();
 		} catch (SQLException e) {
 			System.out.println("Error" + e);
 		}
 	}
+	
 	/**
-	 * permite modificar una tupla en la tabla jugador
+	 * permite modificar una tupla en la tabla liga
 	 * 
 	 * @param DbConnection
 	 *            connection
@@ -117,22 +112,33 @@ public class JugadorDAO {
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			ResultSet res = statement.executeQuery("SELECT * FROM jugador WHERE id = " + id);
+			ResultSet res = statement.executeQuery("SELECT * FROM liga WHERE id = " + id);
 			System.out.println("Introduce el nombre de el campo que quieres cambiar: ");
-			System.out.println("id, nombre, apellido, edad, pais, mail, battletag, password, liga");
+			System.out.println("id, nombre, icono");
 			Scanner sc = new Scanner(System.in);
 			String columna = sc.nextLine();
-			if(columna.equals("id") || columna.equals("nombre") || columna.equals("apellido") || columna.equals("edad") || columna.equals("pais") || columna.equals("mail") || columna.equals("battletag") || columna.equals("password") || columna.equals("liga")){
+			if(columna.equals("id") || columna.equals("nombre") || columna.equals("icono")){
 				int index = res.findColumn(columna);
-				if (index == 1 || index == 9){
+				if (index == 1){
 					System.out.println("Introdce el entero por el que quieres modificarlo: ");
 					int valor = sc.nextInt();
-					statement.executeUpdate("UPDATE jugador SET "+ columna +" = "+ valor +" WHERE id = " + id);
+					statement.executeUpdate("UPDATE liga SET "+ columna +" = "+ valor +" WHERE id = " + id);
 				}
 				else{
 					System.out.println("Introduce el string por el que quieres modificarlo: ");
 					String valor = sc.nextLine();
-					statement.executeUpdate("UPDATE jugador SET "+ columna +" = \""+ valor +"\" WHERE id = " + id);
+					if(columna.equals("nombre")){
+						try {
+							Liga miLiga = Liga.valueOf(valor);
+							String q = "UPDATE liga SET "+ columna +" = \'"+ valor +"\' WHERE id = " + id;
+							statement.executeUpdate(q);
+						} catch(Exception e){
+							System.out.println(e);
+						}
+					}
+					else {
+						statement.executeUpdate("UPDATE liga SET "+ columna +" = \""+ valor +"\" WHERE id = " + id);
+					}
 				}
 			}
 			else{
@@ -144,5 +150,6 @@ public class JugadorDAO {
 			System.out.println("Error" + e);
 		}
 	}
-
+	
+	
 }

@@ -1,19 +1,12 @@
 package com.utad.BBDD.Hito3;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-/**
- * clase que llama a todos los metodos borrar de cada una de las clases DAO
- * 
- * @see *DAO
- */
-public class BorrarTablas {
-	
+public class ModificarTablas {
 	public static void elegir(DbConnection connection) throws ClassNotFoundException, SQLException{
-		System.out.println("1 para borrar JUGADOR");
-		System.out.println("2 para borrar LIGA");
+		System.out.println("1 para modificar JUGADOR");
+		System.out.println("2 para modificar LIGA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -24,10 +17,10 @@ public class BorrarTablas {
 			} else {
 				switch (opcion) {
 				case 1:
-					BorrarTablas.borrarJugador(connection);
+					ModificarTablas.modificarJugador(connection);
 					break;
 				case 2:
-					BorrarTablas.borrarLiga(connection);
+					ModificarTablas.modificarLiga(connection);
 					break;
 				case 3:	
 					break;
@@ -47,22 +40,19 @@ public class BorrarTablas {
 		}
 	}
 	
-	public static void borrarJugador(DbConnection connection) throws ClassNotFoundException, SQLException {
+	public static void modificarJugador(DbConnection connection) throws ClassNotFoundException, SQLException{
 		JugadorDAO miJugadorDAO = new JugadorDAO();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduce el id de el jugador que quieres eliminar: ");
+		System.out.println("Introduce el id de el jugador que quieres modificar: ");
 		int id = sc.nextInt();
-		miJugadorDAO.borrar(connection, id);
-		System.out.println("Se ha borrado al jugador con id: " + id + " exitosamente.");
+		miJugadorDAO.modificar(connection, id);
 	}
 	
-	public static void borrarLiga(DbConnection connection) throws ClassNotFoundException, SQLException {
+	public static void modificarLiga(DbConnection connection) throws ClassNotFoundException, SQLException{
 		LigaDAO miLigaDAO = new LigaDAO();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduce el id de la liga que quieres eliminar: ");
+		System.out.println("Introduce el id de la liga que quieres modificar: ");
 		int id = sc.nextInt();
-		miLigaDAO.borrar(connection, id);
-		System.out.println("Se ha borrado la liga con id: " + id + " exitosamente.");
+		miLigaDAO.modificar(connection, id);
 	}
-	
 }

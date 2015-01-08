@@ -6,7 +6,6 @@ import java.sql.SQLException;
  * clase que casa con la estructura de la tabla jugador
  * 
  */
-
 public class JugadorVO {
 	private int id;
 	private String nombre;

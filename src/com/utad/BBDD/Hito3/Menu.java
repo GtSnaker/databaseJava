@@ -33,20 +33,21 @@ public class Menu {
 				} else {
 					switch (opcion) {
 					case 1:
-						VerTablas.verJugador(connection);
+						VerTablas.elegir(connection);
 						break;
 					case 2:
 						break;
 					case 3:
-						CrearTablas.crearJugador(connection);		
+						CrearTablas.elegir(connection);		
 						break;
 					case 4:
 						BorrarTablas.borrarJugador(connection);
 						break;
 					case 5:
+						ModificarTablas.elegir(connection);
 						break;
 					case 6:
-						System.out.println("caso 6");
+						
 						break;
 					case 7:
 						System.out.println("Buenas noches, bendisiones :)");
