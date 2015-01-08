@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class JugadorXJugadorDAO {
 	
 	/**
-	 * permite insertar una tupla en la tabla jugador
+	 * permite insertar una tupla en la tabla jugadorxjugador
 	 * 
 	 * @param JugadorVO fila
 	 * @param DbConnection connection
@@ -73,10 +73,11 @@ public class JugadorXJugadorDAO {
 	}
 	
 	/**
-	 * permite borrar una tupla en la tabla jugador
+	 * permite borrar una tupla en la tabla jugadorxjugador
 	 * 
 	 * @param DbConnection connection
 	 * @param int id
+	 * @param int id2
 	 * @return void
 	 * @throws SQLException
 	 * @throws ClassNotFoundException

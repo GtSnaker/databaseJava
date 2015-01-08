@@ -16,6 +16,7 @@ public class VerTablas {
 	public static void elegir(DbConnection connection) throws ClassNotFoundException, SQLException{
 		System.out.println("1 para ver las tablas de JUGADOR");
 		System.out.println("2 para ver las tablas de LIGA");
+		System.out.println("3 para ver las tablas de JUGADORXJUGADOR");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -31,7 +32,8 @@ public class VerTablas {
 				case 2:
 					VerTablas.verLiga(connection);
 					break;
-				case 3:	
+				case 3:
+					VerTablas.verJugadorXJugador(connection);
 					break;
 				case 4:
 					break;
@@ -74,6 +76,21 @@ public class VerTablas {
 			for (int i = 0; i < ligas.size(); i++) {
 				miLiga = ligas.get(i);
 				System.out.println("Id: "+ miLiga.id + ", Liga: " + miLiga.liga+", icono: "+miLiga.icono);
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+	}
+	
+	public static void verJugadorXJugador(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXJugadorDAO miJugadorXJugadorDAO = new JugadorXJugadorDAO();
+		JugadorXJugadorVO miJugadorXJugador;
+		ArrayList<JugadorXJugadorVO> jugadores = miJugadorXJugadorDAO.ver(connection);
+		if (jugadores.size() > 0) {
+			for (int i = 0; i < jugadores.size(); i++) {
+				miJugadorXJugador = jugadores.get(i);
+				System.out.println("Id: "+ miJugadorXJugador.getId() + ", Id2: "+ miJugadorXJugador.getId2());
 			}
 			System.out.println("");
 		} else {

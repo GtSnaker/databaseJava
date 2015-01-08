@@ -10,17 +10,8 @@ import java.sql.SQLException;
 public class JugadorXJugadorVO {
 	private int id;
 	private int id2;
-	/*
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}*/
-
 	
-	public JugadorVO (){
+	public JugadorXJugadorVO(){
 		id = -1;
 		id2 = -1;
 	}
