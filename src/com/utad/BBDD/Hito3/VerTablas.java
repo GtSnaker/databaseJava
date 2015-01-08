@@ -18,6 +18,7 @@ public class VerTablas {
 		System.out.println("2 para ver las tablas de LIGA");
 		System.out.println("3 para ver las tablas de JUGADORXJUGADOR");
 		System.out.println("4 para ver las tablas de LOGRO");
+		System.out.println("5 para ver las tablas de MAPA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -40,6 +41,7 @@ public class VerTablas {
 					VerTablas.verLogro(connection);
 					break;
 				case 5:
+					VerTablas.verMapa(connection);
 					break;
 				case 6:
 					System.out.println("caso 6");
@@ -108,6 +110,21 @@ public class VerTablas {
 			for (int i = 0; i < logros.size(); i++) {
 				miLogro = logros.get(i);
 				System.out.println("Id: "+ miLogro.getId() + ", Nombre: " + miLogro.getNombre()+", Descripcion: "+miLogro.getDescripcion());
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+	}
+	
+	public static void verMapa(DbConnection connection) throws ClassNotFoundException, SQLException {
+		MapaDAO miMapaDAO = new MapaDAO();
+		MapaVO miMapa;
+		ArrayList<MapaVO> mapas = miMapaDAO.ver(connection);
+		if (mapas.size() > 0) {
+			for (int i = 0; i < mapas.size(); i++) {
+				miMapa = mapas.get(i);
+				System.out.println("Id: "+ miMapa.getId() + ", Nombre: " + miMapa.getNombre()+", Descripcion: "+miMapa.getDescripcion() + ", Maximo: "+ miMapa.getMax());
 			}
 			System.out.println("");
 		} else {

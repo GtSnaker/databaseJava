@@ -9,6 +9,7 @@ public class ModificarTablas {
 		System.out.println("2 para modificar LIGA");
 		System.out.println("3 para modificar JUGADORXJUGADOR");
 		System.out.println("4 para modificar LOGRO");
+		System.out.println("5 para modificar MAPA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -31,6 +32,7 @@ public class ModificarTablas {
 					ModificarTablas.modificarLogro(connection);
 					break;
 				case 5:
+					ModificarTablas.modificarMapa(connection);
 					break;
 				case 6:
 					System.out.println("caso 6");
@@ -76,5 +78,13 @@ public class ModificarTablas {
 		System.out.println("Introduce el id de la liga que quieres modificar: ");
 		int id = sc.nextInt();
 		miLogroDAO.modificar(connection, id);
+	}
+	
+	public static void modificarMapa(DbConnection connection) throws ClassNotFoundException, SQLException{
+		MapaDAO miMapaDAO = new MapaDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id de el mapa que quieres modificar: ");
+		int id = sc.nextInt();
+		miMapaDAO.modificar(connection, id);
 	}
 }

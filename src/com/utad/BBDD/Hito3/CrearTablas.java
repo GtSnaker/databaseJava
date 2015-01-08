@@ -16,6 +16,7 @@ public class CrearTablas {
 		System.out.println("2 para crear LIGA");
 		System.out.println("3 para crear JUGADORXJUGADOR");
 		System.out.println("4 para crear LOGRO");
+		System.out.println("5 para crear MAPA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -38,6 +39,7 @@ public class CrearTablas {
 					CrearTablas.crearLogro(connection);
 					break;
 				case 5:
+					CrearTablas.crearMapa(connection);
 					break;
 				case 6:
 					System.out.println("caso 6");
@@ -112,5 +114,20 @@ public class CrearTablas {
 		System.out.println("Introduce la descripcion");
 		miLogroVO.setDescripcion(sc.nextLine());
 		miLogroDAO.registrar(miLogroVO, connection);
+	}
+	
+	public static void crearMapa(DbConnection connection) throws ClassNotFoundException, SQLException {
+		MapaDAO miMapaDAO = new MapaDAO();
+		MapaVO miMapaVO = new MapaVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el id");
+		miMapaVO.setId(Integer.parseInt(sc.nextLine()));
+		System.out.println("Introduce el nombre");
+		miMapaVO.setNombre(sc.nextLine());
+		System.out.println("Introduce la descripcion");
+		miMapaVO.setDescripcion(sc.nextLine());
+		System.out.println("Introduce el numero maximo de jugadores");
+		miMapaVO.setMax(Integer.parseInt(sc.nextLine()));
+		miMapaDAO.registrar(miMapaVO, connection);
 	}
 }

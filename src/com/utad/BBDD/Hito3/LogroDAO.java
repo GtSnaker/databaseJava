@@ -107,7 +107,7 @@ public class LogroDAO {
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			ResultSet res = statement.executeQuery("SELECT * FROM jugador WHERE id = " + id);
+			ResultSet res = statement.executeQuery("SELECT * FROM logro WHERE id = " + id);
 			System.out.println("Introduce el nombre de el campo que quieres cambiar: ");
 			System.out.println("id, nombre, descripcion");
 			Scanner sc = new Scanner(System.in);
@@ -128,6 +128,7 @@ public class LogroDAO {
 			else{
 				System.out.println("Introduce uno de los valores aceptados.");
 			}
+			System.out.println("Logro modificado");
 			statement.close();
 //			connection.close();
 		} catch (SQLException e) {

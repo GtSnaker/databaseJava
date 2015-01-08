@@ -16,6 +16,7 @@ public class BorrarTablas {
 		System.out.println("2 para borrar LIGA");
 		System.out.println("3 para borrar JUGADORXJUGADOR");
 		System.out.println("4 para borrar LOGRO");
+		System.out.println("5 para borrar MAPA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -38,6 +39,7 @@ public class BorrarTablas {
 					BorrarTablas.borrarLogro(connection);
 					break;
 				case 5:
+					BorrarTablas.borrarMapa(connection);
 					break;
 				case 6:
 					System.out.println("caso 6");
@@ -86,6 +88,15 @@ public class BorrarTablas {
 		System.out.println("Introduce el id de el logro que quieres eliminar: ");
 		int id = sc.nextInt();
 		miLogroDAO.borrar(connection, id);
+		System.out.println("Se ha borrado la liga con id: " + id + " exitosamente.");
+	}
+	
+	public static void borrarMapa(DbConnection connection) throws ClassNotFoundException, SQLException {
+		MapaDAO miMapaDAO = new MapaDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id de el mapa que quieres eliminar: ");
+		int id = sc.nextInt();
+		miMapaDAO.borrar(connection, id);
 		System.out.println("Se ha borrado la liga con id: " + id + " exitosamente.");
 	}
 	

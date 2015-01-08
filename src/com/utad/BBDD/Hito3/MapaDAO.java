@@ -8,79 +8,73 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.ResultSetMetaData;
-
-/**
- * clase cuyos metodos añaden, borran, ven y modifican tuplas de la tabla liga
- * 
- * @see LigaVO
- * 
- */
-public class LigaDAO {
-	
+public class MapaDAO {
 	/**
-	 * permite insertar una tupla en la tabla liga
+	 * permite insertar una tupla en la tabla jugador
 	 * 
-	 * @param LigaVO fila
-	 * @param DbConnection connection
+	 * @param JugadorVO
+	 *            fila
+	 * @param DbConnection
+	 *            connection
 	 * @return void
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public void registrar(LigaVO fila, DbConnection connection)
+	public void registrar(MapaVO fila, DbConnection connection)
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("INSERT INTO liga VALUES ('"
-					+ fila.getId() + "', '" + fila.getLiga() + "', '"
-					+ fila.getIcono() + "')");
+			statement.executeUpdate("INSERT INTO mapa VALUES ('"
+					+ fila.getId() + "', '" + fila.getNombre() + "', '"
+					+ fila.getDescripcion() + "', '" + fila.getMax() +"')");
 			JOptionPane.showMessageDialog(null,
 					"Se ha registrado Exitosamente", "Información",
 					JOptionPane.INFORMATION_MESSAGE);
 			statement.close();
-//			connection.close();
+			// connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null,
-					"No se pudo registrar la liga");
+			JOptionPane
+					.showMessageDialog(null, "No se pudo registrar el logro");
 		}
 	}
 	
 	/**
-	 * permite consultar todas las tuplas de la tabla liga
+	 * permite consultar todas las tuplas de la tabla jugador
 	 * 
-	 * @param DbConnection connection
-	 * @return ArrayList<LigaVO>
+	 * @param DbConnection
+	 *            connection
+	 * @return ArrayList<JugadorVO>
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<LigaVO> ver(DbConnection connection)
-			throws SQLException, ClassNotFoundException {
-		ArrayList<LigaVO> ligas = new ArrayList<LigaVO>();
+	public ArrayList<MapaVO> ver(DbConnection connection) throws SQLException,
+			ClassNotFoundException {
+		ArrayList<MapaVO> mapas = new ArrayList<MapaVO>();
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			ResultSet res = statement.executeQuery("SELECT * FROM liga");
+			ResultSet res = statement.executeQuery("SELECT * FROM mapa");
 
 			while (res.next()) {
-				String nombreLiga =  res.getString("nombre");
-				Liga miLiga = Liga.valueOf(nombreLiga);
-				ligas.add(new LigaVO(res.getInt("id"), miLiga,  res.getString("icono")));
+				mapas.add(new MapaVO(res.getInt("id"), res
+						.getString("nombre"), res.getString("descripcion"), res.getInt("max")));
 			}
 			res.close();
 			statement.close();
-//			connection.close();
+			// connection.close();
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
-					"no se pudo consultar la liga\n" + e);
+					"no se pudo consultar la Persona\n" + e);
 		}
-		return ligas;
+		return mapas;
 	}
 	
 	/**
-	 * permite borrar una tupla en la tabla liga
+	 * permite borrar una tupla en la tabla jugador
 	 * 
-	 * @param DbConnection connection
+	 * @param DbConnection
+	 *            connection
 	 * @param int id
 	 * @return void
 	 * @throws SQLException
@@ -90,7 +84,7 @@ public class LigaDAO {
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("DELETE FROM liga WHERE id = " + id);
+			statement.executeUpdate("DELETE FROM mapa WHERE id = " + id);
 			statement.close();
 //			connection.close();
 		} catch (SQLException e) {
@@ -99,7 +93,7 @@ public class LigaDAO {
 	}
 	
 	/**
-	 * permite modificar una tupla en la tabla liga
+	 * permite modificar una tupla en la tabla jugador
 	 * 
 	 * @param DbConnection
 	 *            connection
@@ -112,45 +106,32 @@ public class LigaDAO {
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			ResultSet res = statement.executeQuery("SELECT * FROM liga WHERE id = " + id);
+			ResultSet res = statement.executeQuery("SELECT * FROM mapa WHERE id = " + id);
 			System.out.println("Introduce el nombre de el campo que quieres cambiar: ");
-			System.out.println("id, nombre, icono");
+			System.out.println("id, nombre, descripcion, max");
 			Scanner sc = new Scanner(System.in);
 			String columna = sc.nextLine();
-			if(columna.equals("id") || columna.equals("nombre") || columna.equals("icono")){
+			if(columna.equals("id") || columna.equals("nombre") || columna.equals("descripcion") || columna.equals("max")){
 				int index = res.findColumn(columna);
-				if (index == 1){
+				if (index == 1 || index == 4){
 					System.out.println("Introdce el entero por el que quieres modificarlo: ");
 					int valor = sc.nextInt();
-					statement.executeUpdate("UPDATE liga SET "+ columna +" = "+ valor +" WHERE id = " + id);
+					statement.executeUpdate("UPDATE mapa SET "+ columna +" = "+ valor +" WHERE id = " + id);
 				}
 				else{
 					System.out.println("Introduce el string por el que quieres modificarlo: ");
 					String valor = sc.nextLine();
-					if(columna.equals("nombre")){
-						try {
-							Liga miLiga = Liga.valueOf(valor);
-							String q = "UPDATE liga SET "+ columna +" = \'"+ valor +"\' WHERE id = " + id;
-							statement.executeUpdate(q);
-						} catch(Exception e){
-							System.out.println(e);
-						}
-					}
-					else {
-						statement.executeUpdate("UPDATE liga SET "+ columna +" = \""+ valor +"\" WHERE id = " + id);
-					}
+					statement.executeUpdate("UPDATE mapa SET "+ columna +" = \""+ valor +"\" WHERE id = " + id);
 				}
 			}
 			else{
 				System.out.println("Introduce uno de los valores aceptados.");
 			}
-			System.out.println("Liga modificada.");
+			System.out.println("Mapa modificado");
 			statement.close();
 //			connection.close();
 		} catch (SQLException e) {
 			System.out.println("Error" + e);
 		}
 	}
-	
-	
 }

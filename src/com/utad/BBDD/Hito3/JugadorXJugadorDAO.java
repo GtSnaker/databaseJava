@@ -121,6 +121,7 @@ public class JugadorXJugadorDAO {
 			else{
 				System.out.println("Introduce uno de los valores aceptados.");
 			}
+			System.out.println("JugadorXJugador modificado.");
 			statement.close();
 //			connection.close();
 		} catch (SQLException e) {
