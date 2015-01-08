@@ -41,7 +41,7 @@ public class Menu {
 						CrearTablas.elegir(connection);		
 						break;
 					case 4:
-						BorrarTablas.borrarJugador(connection);
+						BorrarTablas.elegir(connection);
 						break;
 					case 5:
 						ModificarTablas.elegir(connection);

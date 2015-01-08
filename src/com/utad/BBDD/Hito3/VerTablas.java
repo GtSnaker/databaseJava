@@ -17,6 +17,7 @@ public class VerTablas {
 		System.out.println("1 para ver las tablas de JUGADOR");
 		System.out.println("2 para ver las tablas de LIGA");
 		System.out.println("3 para ver las tablas de JUGADORXJUGADOR");
+		System.out.println("4 para ver las tablas de LOGRO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -36,6 +37,7 @@ public class VerTablas {
 					VerTablas.verJugadorXJugador(connection);
 					break;
 				case 4:
+					VerTablas.verLogro(connection);
 					break;
 				case 5:
 					break;
@@ -98,5 +100,19 @@ public class VerTablas {
 		}
 	}
 	
+	public static void verLogro(DbConnection connection) throws ClassNotFoundException, SQLException {
+		LogroDAO miLogroDAO = new LogroDAO();
+		LogroVO miLogro;
+		ArrayList<LogroVO> logros = miLogroDAO.ver(connection);
+		if (logros.size() > 0) {
+			for (int i = 0; i < logros.size(); i++) {
+				miLogro = logros.get(i);
+				System.out.println("Id: "+ miLogro.getId() + ", Nombre: " + miLogro.getNombre()+", Descripcion: "+miLogro.getDescripcion());
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+	}
 	
 }

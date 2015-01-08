@@ -7,6 +7,8 @@ public class ModificarTablas {
 	public static void elegir(DbConnection connection) throws ClassNotFoundException, SQLException{
 		System.out.println("1 para modificar JUGADOR");
 		System.out.println("2 para modificar LIGA");
+		System.out.println("3 para modificar JUGADORXJUGADOR");
+		System.out.println("4 para modificar LOGRO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -22,9 +24,11 @@ public class ModificarTablas {
 				case 2:
 					ModificarTablas.modificarLiga(connection);
 					break;
-				case 3:	
+				case 3:
+					ModificarTablas.modificarJugadorXJugador(connection);
 					break;
 				case 4:
+					ModificarTablas.modificarLogro(connection);
 					break;
 				case 5:
 					break;
@@ -54,5 +58,23 @@ public class ModificarTablas {
 		System.out.println("Introduce el id de la liga que quieres modificar: ");
 		int id = sc.nextInt();
 		miLigaDAO.modificar(connection, id);
+	}
+	
+	public static void modificarJugadorXJugador(DbConnection connection) throws ClassNotFoundException, SQLException{
+		JugadorXJugadorDAO miJugadorXJugadorDAO = new JugadorXJugadorDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id el primer jugador amigo que quieres modificar: ");
+		int id = sc.nextInt();
+		System.out.println("Introduce el id el segundo jugador amigo que quieres modificar: ");
+		int id2 = sc.nextInt();
+		miJugadorXJugadorDAO.modificar(connection, id, id2);
+	}
+	
+	public static void modificarLogro(DbConnection connection) throws ClassNotFoundException, SQLException{
+		LogroDAO miLogroDAO = new LogroDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id de la liga que quieres modificar: ");
+		int id = sc.nextInt();
+		miLogroDAO.modificar(connection, id);
 	}
 }

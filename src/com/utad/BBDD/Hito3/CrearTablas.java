@@ -14,6 +14,8 @@ public class CrearTablas {
 	public static void elegir(DbConnection connection) throws ClassNotFoundException, SQLException{
 		System.out.println("1 para crear JUGADOR");
 		System.out.println("2 para crear LIGA");
+		System.out.println("3 para crear JUGADORXJUGADOR");
+		System.out.println("4 para crear LOGRO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -30,8 +32,10 @@ public class CrearTablas {
 					CrearTablas.crearLiga(connection);
 					break;
 				case 3:	
+					CrearTablas.crearJugadorXJugador(connection);
 					break;
 				case 4:
+					CrearTablas.crearLogro(connection);
 					break;
 				case 5:
 					break;
@@ -84,5 +88,29 @@ public class CrearTablas {
 		System.out.println("Introduce el nombre");
 		miLigaVO.setIcono(sc.nextLine());
 		miLigaDAO.registrar(miLigaVO, connection);
+	}
+	
+	public static void crearJugadorXJugador(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXJugadorDAO miJugadorXJugadorDAO = new JugadorXJugadorDAO();
+		JugadorXJugadorVO miJugadorXJugadorVO = new JugadorXJugadorVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el id");
+		miJugadorXJugadorVO.setId(sc.nextInt());
+		System.out.println("Introduce el id2");
+		miJugadorXJugadorVO.setId2(sc.nextInt());
+		miJugadorXJugadorDAO.registrar(miJugadorXJugadorVO, connection);
+	}
+	
+	public static void crearLogro(DbConnection connection) throws ClassNotFoundException, SQLException {
+		LogroDAO miLogroDAO = new LogroDAO();
+		LogroVO miLogroVO = new LogroVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el id");
+		miLogroVO.setId(Integer.parseInt(sc.nextLine()));
+		System.out.println("Introduce el nombre");
+		miLogroVO.setNombre(sc.nextLine());
+		System.out.println("Introduce la descripcion");
+		miLogroVO.setDescripcion(sc.nextLine());
+		miLogroDAO.registrar(miLogroVO, connection);
 	}
 }
