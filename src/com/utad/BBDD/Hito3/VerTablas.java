@@ -19,13 +19,15 @@ public class VerTablas {
 		System.out.println("3 para ver las tablas de JUGADORXJUGADOR");
 		System.out.println("4 para ver las tablas de LOGRO");
 		System.out.println("5 para ver las tablas de MAPA");
+		System.out.println("6 para ver las tablas de PERIODO");
+		System.out.println("7 para ver las tablas de RAZA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
 		try {
 			opcion = Integer.parseInt(numero);
-			if (opcion < 1 || opcion > 7) {
-				System.out.println("Solo son validos numeros del 1 al 7");
+			if (opcion < 1 || opcion > 14) {
+				System.out.println("Solo son validos numeros del 1 al 14");
 			} else {
 				switch (opcion) {
 				case 1:
@@ -44,9 +46,24 @@ public class VerTablas {
 					VerTablas.verMapa(connection);
 					break;
 				case 6:
-					System.out.println("caso 6");
+					VerTablas.verPeriodo(connection);
 					break;
 				case 7:
+					VerTablas.verRaza(connection);
+					break;
+				case 8:
+					break;
+				case 9:
+					break;
+				case 10:
+					break;
+				case 11:
+					break;
+				case 12:
+					break;
+				case 13:
+					break;
+				case 14:
 					break;
 				}
 			}
@@ -125,6 +142,36 @@ public class VerTablas {
 			for (int i = 0; i < mapas.size(); i++) {
 				miMapa = mapas.get(i);
 				System.out.println("Id: "+ miMapa.getId() + ", Nombre: " + miMapa.getNombre()+", Descripcion: "+miMapa.getDescripcion() + ", Maximo: "+ miMapa.getMax());
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+	}
+	
+	public static void verPeriodo(DbConnection connection) throws ClassNotFoundException, SQLException {
+		PeriodoDAO miPeriodoDAO = new PeriodoDAO();
+		PeriodoVO miPeriodo;
+		ArrayList<PeriodoVO> periodos = miPeriodoDAO.ver(connection);
+		if (periodos.size() > 0) {
+			for (int i = 0; i < periodos.size(); i++) {
+				miPeriodo = periodos.get(i);
+				System.out.println("Inicio: "+ miPeriodo.getInicio() + ", Fin: " + miPeriodo.getFin());
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+	}
+	
+	public static void verRaza(DbConnection connection) throws ClassNotFoundException, SQLException {
+		RazaDAO miRazaDAO = new RazaDAO();
+		RazaVO miRaza;
+		ArrayList<RazaVO> razas = miRazaDAO.ver(connection);
+		if (razas.size() > 0) {
+			for (int i = 0; i < razas.size(); i++) {
+				miRaza = razas.get(i);
+				System.out.println("Raza: "+ miRaza.getRaza());
 			}
 			System.out.println("");
 		} else {

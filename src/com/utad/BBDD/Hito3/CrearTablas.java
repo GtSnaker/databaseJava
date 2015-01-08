@@ -2,6 +2,7 @@ package com.utad.BBDD.Hito3;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Scanner;
 
 /**
@@ -17,13 +18,15 @@ public class CrearTablas {
 		System.out.println("3 para crear JUGADORXJUGADOR");
 		System.out.println("4 para crear LOGRO");
 		System.out.println("5 para crear MAPA");
+		System.out.println("6 para crear PERIODO");
+		System.out.println("7 para crear RAZA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
 		try {
 			opcion = Integer.parseInt(numero);
-			if (opcion < 1 || opcion > 7) {
-				System.out.println("Solo son validos numeros del 1 al 7");
+			if (opcion < 1 || opcion > 14) {
+				System.out.println("Solo son validos numeros del 1 al 14");
 			} else {
 				switch (opcion) {
 				case 1:
@@ -42,9 +45,24 @@ public class CrearTablas {
 					CrearTablas.crearMapa(connection);
 					break;
 				case 6:
-					System.out.println("caso 6");
+					CrearTablas.crearPeriodo(connection);
 					break;
 				case 7:
+					CrearTablas.crearRaza(connection);
+					break;
+				case 8:
+					break;
+				case 9:
+					break;
+				case 10:
+					break;
+				case 11:
+					break;
+				case 12:
+					break;
+				case 13:
+					break;
+				case 14:
 					break;
 				}
 			}
@@ -86,7 +104,7 @@ public class CrearTablas {
 		System.out.println("Introduce el id");
 		miLigaVO.setId(Integer.parseInt(sc.nextLine()));
 		System.out.println("Introduce la liga");
-		miLigaVO.setLiga(Liga.diamante);
+		miLigaVO.setLiga(Liga.valueOf(sc.nextLine()));
 		System.out.println("Introduce el nombre");
 		miLigaVO.setIcono(sc.nextLine());
 		miLigaDAO.registrar(miLigaVO, connection);
@@ -129,5 +147,53 @@ public class CrearTablas {
 		System.out.println("Introduce el numero maximo de jugadores");
 		miMapaVO.setMax(Integer.parseInt(sc.nextLine()));
 		miMapaDAO.registrar(miMapaVO, connection);
+	}
+	
+	public static void crearPeriodo(DbConnection connection) throws ClassNotFoundException, SQLException {
+		PeriodoDAO miPeriodoDAO = new PeriodoDAO();
+		PeriodoVO miPeriodoVO = new PeriodoVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introdce el año del inicio: ");
+		int anio = sc.nextInt();
+		System.out.println("Introdce el mes del inicio: ");
+		int mes = sc.nextInt();
+		System.out.println("Introdce el dia del inicio: ");
+		int dia = sc.nextInt();
+		System.out.println("Introdce la hora del inicio: ");
+		int hora = sc.nextInt();
+		System.out.println("Introdce el minuto del inicio: ");
+		int minuto = sc.nextInt();
+		System.out.println("Introdce el segundo del inicio: ");
+		int segundo = sc.nextInt();
+		System.out.println("Introdce el nano del inicio: ");
+		int nano = sc.nextInt();
+		Timestamp dato = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
+		miPeriodoVO.setInicio(dato);
+		System.out.println("Introdce el año del fin: ");
+		anio = sc.nextInt();
+		System.out.println("Introdce el mes del fin: ");
+		mes = sc.nextInt();
+		System.out.println("Introdce el dia del fin: ");
+		dia = sc.nextInt();
+		System.out.println("Introdce la hora del fin: ");
+		hora = sc.nextInt();
+		System.out.println("Introdce el minuto del fin: ");
+		minuto = sc.nextInt();
+		System.out.println("Introdce el segundo del fin: ");
+		segundo = sc.nextInt();
+		System.out.println("Introdce el nano del fin: ");
+		nano = sc.nextInt();
+		dato = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
+		miPeriodoVO.setFin(dato);
+		miPeriodoDAO.registrar(miPeriodoVO, connection);
+	}
+	
+	public static void crearRaza(DbConnection connection) throws ClassNotFoundException, SQLException {
+		RazaDAO miRazaDAO = new RazaDAO();
+		RazaVO miRazaVO = new RazaVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce la raza");
+		miRazaVO.setRaza(Raza.valueOf(sc.nextLine()));
+		miRazaDAO.registrar(miRazaVO, connection);
 	}
 }

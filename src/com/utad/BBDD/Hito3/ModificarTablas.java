@@ -1,6 +1,7 @@
 package com.utad.BBDD.Hito3;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Scanner;
 
 public class ModificarTablas {
@@ -10,13 +11,15 @@ public class ModificarTablas {
 		System.out.println("3 para modificar JUGADORXJUGADOR");
 		System.out.println("4 para modificar LOGRO");
 		System.out.println("5 para modificar MAPA");
+		System.out.println("6 para modificar PERIODO");
+		System.out.println("7 para modificar RAZA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
 		try {
 			opcion = Integer.parseInt(numero);
-			if (opcion < 1 || opcion > 7) {
-				System.out.println("Solo son validos numeros del 1 al 7");
+			if (opcion < 1 || opcion > 14) {
+				System.out.println("Solo son validos numeros del 1 al 14");
 			} else {
 				switch (opcion) {
 				case 1:
@@ -35,9 +38,24 @@ public class ModificarTablas {
 					ModificarTablas.modificarMapa(connection);
 					break;
 				case 6:
-					System.out.println("caso 6");
+					ModificarTablas.modificarPeriodo(connection);
 					break;
 				case 7:
+					ModificarTablas.modificarRaza(connection);
+					break;
+				case 8:
+					break;
+				case 9:
+					break;
+				case 10:
+					break;
+				case 11:
+					break;
+				case 12:
+					break;
+				case 13:
+					break;
+				case 14:
 					break;
 				}
 			}
@@ -86,5 +104,49 @@ public class ModificarTablas {
 		System.out.println("Introduce el id de el mapa que quieres modificar: ");
 		int id = sc.nextInt();
 		miMapaDAO.modificar(connection, id);
+	}
+	
+	public static void modificarPeriodo(DbConnection connection) throws ClassNotFoundException, SQLException{
+		PeriodoDAO miPeriodoDAO = new PeriodoDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introdce el año del inicio: ");
+		int anio = sc.nextInt();
+		System.out.println("Introdce el mes del inicio: ");
+		int mes = sc.nextInt();
+		System.out.println("Introdce el dia del inicio: ");
+		int dia = sc.nextInt();
+		System.out.println("Introdce la hora del inicio: ");
+		int hora = sc.nextInt();
+		System.out.println("Introdce el minuto del inicio: ");
+		int minuto = sc.nextInt();
+		System.out.println("Introdce el segundo del inicio: ");
+		int segundo = sc.nextInt();
+		System.out.println("Introdce el nano del inicio: ");
+		int nano = sc.nextInt();
+		Timestamp dato = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
+		System.out.println("Introdce el año del fin: ");
+		anio = sc.nextInt();
+		System.out.println("Introdce el mes del fin: ");
+		mes = sc.nextInt();
+		System.out.println("Introdce el dia del fin: ");
+		dia = sc.nextInt();
+		System.out.println("Introdce la hora del fin: ");
+		hora = sc.nextInt();
+		System.out.println("Introdce el minuto del fin: ");
+		minuto = sc.nextInt();
+		System.out.println("Introdce el segundo del fin: ");
+		segundo = sc.nextInt();
+		System.out.println("Introdce el nano del fin: ");
+		nano = sc.nextInt();
+		Timestamp dato2 = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
+		miPeriodoDAO.modificar(connection, dato, dato2);
+	}
+	
+	public static void modificarRaza(DbConnection connection) throws ClassNotFoundException, SQLException{
+		RazaDAO miRazaDAO = new RazaDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el nombre de el Raza que quieres modificar: ");
+		Raza raza = Raza.valueOf(sc.nextLine());
+		miRazaDAO.modificar(connection, raza);
 	}
 }

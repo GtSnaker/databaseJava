@@ -2,6 +2,7 @@ package com.utad.BBDD.Hito3;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Scanner;
 
 /**
@@ -17,13 +18,15 @@ public class BorrarTablas {
 		System.out.println("3 para borrar JUGADORXJUGADOR");
 		System.out.println("4 para borrar LOGRO");
 		System.out.println("5 para borrar MAPA");
+		System.out.println("6 para borrar PERIODO");
+		System.out.println("7 para borrar RAZA");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
 		try {
 			opcion = Integer.parseInt(numero);
-			if (opcion < 1 || opcion > 7) {
-				System.out.println("Solo son validos numeros del 1 al 7");
+			if (opcion < 1 || opcion > 14) {
+				System.out.println("Solo son validos numeros del 1 al 14");
 			} else {
 				switch (opcion) {
 				case 1:
@@ -42,9 +45,24 @@ public class BorrarTablas {
 					BorrarTablas.borrarMapa(connection);
 					break;
 				case 6:
-					System.out.println("caso 6");
+					BorrarTablas.borrarPeriodo(connection);
 					break;
 				case 7:
+					BorrarTablas.borrarRaza(connection);
+					break;
+				case 8:
+					break;
+				case 9:
+					break;
+				case 10:
+					break;
+				case 11:
+					break;
+				case 12:
+					break;
+				case 13:
+					break;
+				case 14:
 					break;
 				}
 			}
@@ -100,4 +118,49 @@ public class BorrarTablas {
 		System.out.println("Se ha borrado la liga con id: " + id + " exitosamente.");
 	}
 	
+	public static void borrarPeriodo(DbConnection connection) throws ClassNotFoundException, SQLException {
+		PeriodoDAO miPeriodoDAO = new PeriodoDAO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introdce el año del inicio: ");
+		int anio = sc.nextInt();
+		System.out.println("Introdce el mes del inicio: ");
+		int mes = sc.nextInt();
+		System.out.println("Introdce el dia del inicio: ");
+		int dia = sc.nextInt();
+		System.out.println("Introdce la hora del inicio: ");
+		int hora = sc.nextInt();
+		System.out.println("Introdce el minuto del inicio: ");
+		int minuto = sc.nextInt();
+		System.out.println("Introdce el segundo del inicio: ");
+		int segundo = sc.nextInt();
+		System.out.println("Introdce el nano del inicio: ");
+		int nano = sc.nextInt();
+		Timestamp dato = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
+		System.out.println("Introdce el año del fin: ");
+		anio = sc.nextInt();
+		System.out.println("Introdce el mes del fin: ");
+		mes = sc.nextInt();
+		System.out.println("Introdce el dia del fin: ");
+		dia = sc.nextInt();
+		System.out.println("Introdce la hora del fin: ");
+		hora = sc.nextInt();
+		System.out.println("Introdce el minuto del fin: ");
+		minuto = sc.nextInt();
+		System.out.println("Introdce el segundo del fin: ");
+		segundo = sc.nextInt();
+		System.out.println("Introdce el nano del fin: ");
+		nano = sc.nextInt();
+		Timestamp dato2 = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
+		miPeriodoDAO.borrar(connection, dato, dato2);
+		System.out.println("Se ha borrado el periodo con inicio: " + dato + " y fin: " + dato2);
+	}
+	
+	public static void borrarRaza(DbConnection connection) throws ClassNotFoundException, SQLException {
+		RazaDAO miRazaDAO = new RazaDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el nombre de la raza que quieres eliminar: ");
+		Raza raza = Raza.valueOf(sc.nextLine());
+		miRazaDAO.borrar(connection, raza);
+		System.out.println("Se ha borrado la raza con nombre: " + raza + " exitosamente.");
+	}
 }
