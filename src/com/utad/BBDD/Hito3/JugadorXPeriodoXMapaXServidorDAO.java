@@ -107,4 +107,66 @@ public class JugadorXPeriodoXMapaXServidorDAO {
 			System.out.println("Error" + e);
 		}
 	}
+	
+	/**
+	 * permite modificar una tupla en la tabla jugadorxperiodoxmapaxservidor
+	 * 
+	 * @param DbConnection
+	 *            connection
+	 * @param int id
+	 * @param int idMapa
+	 * @param idServidor
+	 * @param String inicio
+	 * @param String fin
+	 * @return void
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public void modificar(DbConnection connection, int idJugador, String inicio) throws SQLException,
+			ClassNotFoundException {
+		try {
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet res = statement
+					.executeQuery("SELECT * FROM jugadorxperiodoxmapaxservidor WHERE idjugador = " + idJugador + " AND inicio = " + inicio);
+			
+			while (res.next()) {
+				System.out.println("IdJugador: " + res.getInt("idJugador") + ", idMapa: "
+						+ res.getInt("idMapa") + ", idServidor: "
+						+ res.getInt("idServidor") + ", Inicio: "
+						+ res.getString("inicio") + ", Fin: "
+						+ res.getString("fin") + ", Ganador: "
+						+ res.getInt("ganador"));
+			}
+			System.out
+					.println("Introduce el nombre de el campo que quieres cambiar: ");
+			System.out
+					.println("idJugador, idMapa, idServidor, inicio, fin, ganador");
+			Scanner sc = new Scanner(System.in);
+			String columna = sc.nextLine();
+			if (columna.equals("idJugador") || columna.equals("idMapa")
+					|| columna.equals("idServidor") || columna.equals("inicio")) {
+				int index = res.findColumn(columna);
+				if (index == 1 || index == 2 || index == 3 || index == 6) {
+					System.out
+							.println("Introdce el entero por el que quieres modificarlo: ");
+					int valor = sc.nextInt();
+					statement.executeUpdate("UPDATE jugadorxperiodoxmapaxservidor SET " + columna
+							+ " = " + valor + " WHERE idjugador = " + idJugador + " AND inicio = " + inicio);
+				} else {
+					System.out
+							.println("Introduce el string por el que quieres modificarlo: ");
+					String valor = sc.nextLine();
+					statement.executeUpdate("UPDATE jugadorxperiodoxmapaxservidor SET " + columna
+							+ " = \"" + valor + "\" WHERE idjugador = " + idJugador + " AND inicio = " + inicio);
+				}
+			} else {
+				System.out.println("Introduce uno de los valores aceptados.");
+			}
+			System.out.println("Jugador modificado.");
+			statement.close();
+			// connection.close();
+		} catch (SQLException e) {
+			System.out.println("Error" + e);
+		}
+	}
 }

@@ -105,4 +105,63 @@ public class JugadorXRazaDAO {
 			System.out.println("Error" + e);
 		}
 	}
+	/**
+	 * permite modificar una tupla en la tabla jugadorxraza
+	 * 
+	 * @param DbConnection connection
+	 * @param int id
+	 * @param Raza nombre
+	 * @return void
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public void modificar(DbConnection connection, int id, Raza nombre) throws SQLException,
+			ClassNotFoundException {
+		try {
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet res = statement
+					.executeQuery("SELECT * FROM jugadorxraza WHERE id = " + id + " AND nombre = " + nombre);
+			
+			while (res.next()) {
+				String nombreRaza = res.getString("nombre");
+				Raza miRaza = Raza.valueOf(nombreRaza);
+				System.out.println("Id: " + res.getInt("id") + ", Nombre: "
+						+ miRaza + ", Ganadas: "
+						+ res.getInt("ganadas") + ", Perdidas: "
+						+ res.getString("inicio") + ", Fin: "
+						+ res.getString("fin") + ", Ganador: "
+						+ res.getInt("ganador"));
+			}
+			System.out
+					.println("Introduce el nombre de el campo que quieres cambiar: ");
+			System.out
+					.println("id, nombre, ganadas, perdidas");
+			Scanner sc = new Scanner(System.in);
+			String columna = sc.nextLine();
+			if (columna.equals("id") || columna.equals("nombre")
+					|| columna.equals("ganadas") || columna.equals("perdidas")) {
+				int index = res.findColumn(columna);
+				if (index == 1 || index == 3 || index == 4) {
+					System.out
+							.println("Introdce el entero por el que quieres modificarlo: ");
+					int valor = sc.nextInt();
+					statement.executeUpdate("UPDATE jugadorxraza SET " + columna
+							+ " = " + valor + " WHERE id = " + id + " AND nombre = " + nombre);
+				} else {
+					System.out
+							.println("Introduce el string por el que quieres modificarlo: ");
+					String valor = sc.nextLine();
+					statement.executeUpdate("UPDATE jugadorxraza SET " + columna
+							+ " = \"" + valor + "\" WHERE id = " + id + " AND nombre = " + nombre);
+				}
+			} else {
+				System.out.println("Introduce uno de los valores aceptados.");
+			}
+			System.out.println("Jugador modificado.");
+			statement.close();
+			// connection.close();
+		} catch (SQLException e) {
+			System.out.println("Error" + e);
+		}
+	}
 }

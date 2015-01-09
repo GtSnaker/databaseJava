@@ -94,4 +94,57 @@ public class JugadorXTorneoDAO {
 			System.out.println("Error" + e);
 		}
 	}
+	
+	/**
+	 * permite modificar una tupla en la tabla jugadorxtorneo
+	 * 
+	 * @param DbConnection connection
+	 * @param int id
+	 * @param String nombre
+	 * @return void
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public void modificar(DbConnection connection, int id, String nombre) throws SQLException,
+			ClassNotFoundException {
+		try {
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet res = statement
+					.executeQuery("SELECT * FROM jugadorxtorneo WHERE id = " + id + " AND nombre = " + nombre);
+			
+			while (res.next()) {
+				System.out.println("Id: " + res.getInt("id") + ", Nombre: "
+						+ res.getString("nombre"));
+			}
+			System.out
+					.println("Introduce el nombre de el campo que quieres cambiar: ");
+			System.out
+					.println("id, nombre");
+			Scanner sc = new Scanner(System.in);
+			String columna = sc.nextLine();
+			if (columna.equals("id") || columna.equals("nombre")) {
+				int index = res.findColumn(columna);
+				if (index == 1) {
+					System.out
+							.println("Introdce el entero por el que quieres modificarlo: ");
+					int valor = sc.nextInt();
+					statement.executeUpdate("UPDATE jugadorxtorneo SET " + columna
+							+ " = " + valor + " WHERE id = " + id + " AND nombre = " + nombre);
+				} else {
+					System.out
+							.println("Introduce el string por el que quieres modificarlo: ");
+					String valor = sc.nextLine();
+					statement.executeUpdate("UPDATE jugadorxtorneo SET " + columna
+							+ " = \"" + valor + "\" WHERE id = " + id + " AND nombre = " + nombre);
+				}
+			} else {
+				System.out.println("Introduce uno de los valores aceptados.");
+			}
+			System.out.println("Jugador modificado.");
+			statement.close();
+			// connection.close();
+		} catch (SQLException e) {
+			System.out.println("Error" + e);
+		}
+	}
 }

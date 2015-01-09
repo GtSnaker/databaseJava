@@ -145,4 +145,50 @@ public class ModificarTablas {
 		int liga = Integer.parseInt(sc.nextLine());
 		miTorneoDAO.modificar(connection, nombre, liga);
 	}
+	public static void modificarJugadorXPeriodoXMapaXServidor(DbConnection connection) throws ClassNotFoundException, SQLException{
+		JugadorXPeriodoXMapaXServidorDAO miJugadorXPeriodoXMapaXServidorDAO = new JugadorXPeriodoXMapaXServidorDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id: ");
+		int id = sc.nextInt();
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		String inicio = sc.nextLine();
+		miJugadorXPeriodoXMapaXServidorDAO.modificar(connection, id,inicio);
+	}
+	
+	public static void modificarJugadorXRaza(DbConnection connection) throws ClassNotFoundException, SQLException{
+		JugadorXRazaDAO miJugadorXRazaDAO = new JugadorXRazaDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id : ");
+		int id = sc.nextInt();
+		System.out.println("Introduce el nombre de la raza: ");
+		String nombreRaza = sc.nextLine();
+		Raza miRaza = Raza.valueOf(nombreRaza);
+		System.out.println("Introduce el numero de partidas ganadas: ");
+		int ganadas = sc.nextInt();
+		System.out.println("Introduce el numero de partidas perdidas: ");
+		int perdidas = sc.nextInt();
+		miJugadorXRazaDAO.modificar(connection, id , miRaza);
+	}
+	
+	public static void modificarJugadorXServidor(DbConnection connection) throws ClassNotFoundException, SQLException{
+		JugadorXServidorDAO miJugadorXServidorDAO = new JugadorXServidorDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el idJugador : ");
+		int idJugador = sc.nextInt();
+		System.out.println("Introduce el idServidor: ");
+		int idServidor = sc.nextInt();
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		String inicio = sc.nextLine();
+		miJugadorXServidorDAO.modificar(connection, idJugador , idServidor, inicio);
+	}
+	
+	public static void modificarJugadorXTorneo(DbConnection connection) throws ClassNotFoundException, SQLException{
+		JugadorXTorneoDAO miJugadorXTorneoDAO = new JugadorXTorneoDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el idJugador : ");
+		int id = sc.nextInt();
+		System.out.println("Introduce el nombre: ");
+		String nombre = sc.nextLine();
+		miJugadorXTorneoDAO.modificar(connection, id , nombre);
+	}
 }

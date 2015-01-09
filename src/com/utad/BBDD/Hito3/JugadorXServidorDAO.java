@@ -102,4 +102,61 @@ public class JugadorXServidorDAO {
 			System.out.println("Error" + e);
 		}
 	}
+	
+	/**
+	 * permite modificar una tupla en la tabla jugadorxservidor
+	 * 
+	 * @param DbConnection connection
+	 * @param int idJugador
+	 * @param int idServidor
+	 * @param String inicio
+	 * @return void
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public void modificar(DbConnection connection, int idJugador, int idServidor, String inicio) throws SQLException,
+			ClassNotFoundException {
+		try {
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet res = statement
+					.executeQuery("SELECT * FROM jugadorxservidor WHERE idJugador = " + idJugador + " AND idServidor = " + idServidor + " AND inicio = " + inicio);
+			
+			while (res.next()) {
+				System.out.println("IdJugador: " + res.getInt("idJugador") + ", IdServidor: "
+						+ res.getInt("idServidor") + ", Inicio: "
+						+ res.getString("incio") + ", Fin: "
+						+ res.getString("fin"));
+			}
+			System.out
+					.println("Introduce el nombre de el campo que quieres cambiar: ");
+			System.out
+					.println("idJugador, idServidor, inicio, fin");
+			Scanner sc = new Scanner(System.in);
+			String columna = sc.nextLine();
+			if (columna.equals("idJugador") || columna.equals("idServidor")
+					|| columna.equals("inicio") || columna.equals("fin")) {
+				int index = res.findColumn(columna);
+				if (index == 1 || index == 2) {
+					System.out
+							.println("Introdce el entero por el que quieres modificarlo: ");
+					int valor = sc.nextInt();
+					statement.executeUpdate("UPDATE jugadorxservidor SET " + columna
+							+ " = " + valor + " WHERE idJugador = " + idJugador + " AND idServidor = " + idServidor + " AND inicio = " + inicio);
+				} else {
+					System.out
+							.println("Introduce el string por el que quieres modificarlo: ");
+					String valor = sc.nextLine();
+					statement.executeUpdate("UPDATE jugadorxservidor SET " + columna
+							+ " = \"" + valor + " WHERE idJugador = " + idJugador + " AND idServidor = " + idServidor + " AND inicio = " + inicio);
+				}
+			} else {
+				System.out.println("Introduce uno de los valores aceptados.");
+			}
+			System.out.println("Jugador modificado.");
+			statement.close();
+			// connection.close();
+		} catch (SQLException e) {
+			System.out.println("Error" + e);
+		}
+	}
 }
