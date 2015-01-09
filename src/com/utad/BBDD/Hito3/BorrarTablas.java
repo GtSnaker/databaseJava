@@ -20,6 +20,8 @@ public class BorrarTablas {
 		System.out.println("5 para borrar MAPA");
 		System.out.println("6 para borrar PERIODO");
 		System.out.println("7 para borrar RAZA");
+		System.out.println("8 para borrar SERVIDOR");
+		System.out.println("9 para borrar TORNEO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -51,8 +53,10 @@ public class BorrarTablas {
 					BorrarTablas.borrarRaza(connection);
 					break;
 				case 8:
+					BorrarTablas.borrarServidor(connection);
 					break;
 				case 9:
+					BorrarTablas.borrarTorneo(connection);
 					break;
 				case 10:
 					break;
@@ -162,5 +166,25 @@ public class BorrarTablas {
 		Raza raza = Raza.valueOf(sc.nextLine());
 		miRazaDAO.borrar(connection, raza);
 		System.out.println("Se ha borrado la raza con nombre: " + raza + " exitosamente.");
+	}
+	
+	public static void borrarServidor(DbConnection connection) throws ClassNotFoundException, SQLException {
+		ServidorDAO miServidorDAO = new ServidorDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id del servidor que quieres eliminar: ");
+		int valor = sc.nextInt();
+		miServidorDAO.borrar(connection, valor);
+		System.out.println("Se ha borrado el servidor con id: " + valor + " exitosamente.");
+	}
+	
+	public static void borrarTorneo(DbConnection connection) throws ClassNotFoundException, SQLException {
+		TorneoDAO miTorneoDAO = new TorneoDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el nombre del torneo que quieres eliminar: ");
+		String nombre = sc.nextLine();
+		System.out.println("Introduce el id de la liga del torneo que quieres eliminar: ");
+		int liga = sc.nextInt();
+		miTorneoDAO.borrar(connection, nombre, liga);
+		System.out.println("Se ha borrado el torneo con nombre: " + nombre + " y liga: " + liga);
 	}
 }

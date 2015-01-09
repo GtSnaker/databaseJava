@@ -13,6 +13,8 @@ public class ModificarTablas {
 		System.out.println("5 para modificar MAPA");
 		System.out.println("6 para modificar PERIODO");
 		System.out.println("7 para modificar RAZA");
+		System.out.println("8 para modificar SERVIDOR");
+		System.out.println("9 para modificar TORNEO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -44,8 +46,10 @@ public class ModificarTablas {
 					ModificarTablas.modificarRaza(connection);
 					break;
 				case 8:
+					ModificarTablas.modificarServidor(connection);
 					break;
 				case 9:
+					ModificarTablas.modificarTorneo(connection);
 					break;
 				case 10:
 					break;
@@ -148,5 +152,23 @@ public class ModificarTablas {
 		System.out.println("Introduce el nombre de el Raza que quieres modificar: ");
 		Raza raza = Raza.valueOf(sc.nextLine());
 		miRazaDAO.modificar(connection, raza);
+	}
+	
+	public static void modificarServidor(DbConnection connection) throws ClassNotFoundException, SQLException{
+		ServidorDAO miServidorDAO = new ServidorDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id de el servidor que quieres modificar: ");
+		int valor = sc.nextInt();
+		miServidorDAO.modificar(connection, valor);
+	}
+	
+	public static void modificarTorneo(DbConnection connection) throws ClassNotFoundException, SQLException{
+		TorneoDAO miTorneoDAO = new TorneoDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el nombre del torneo que quieres modificar: ");
+		String nombre = sc.nextLine();
+		System.out.println("Introduce el id de la liga del torneo que quieres eliminar: ");
+		int liga = Integer.parseInt(sc.nextLine());
+		miTorneoDAO.modificar(connection, nombre, liga);
 	}
 }

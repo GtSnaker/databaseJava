@@ -20,6 +20,8 @@ public class CrearTablas {
 		System.out.println("5 para crear MAPA");
 		System.out.println("6 para crear PERIODO");
 		System.out.println("7 para crear RAZA");
+		System.out.println("8 para crear SERVIDOR");
+		System.out.println("9 para crear TORNEO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;
@@ -51,8 +53,10 @@ public class CrearTablas {
 					CrearTablas.crearRaza(connection);
 					break;
 				case 8:
+					CrearTablas.crearServidor(connection);
 					break;
 				case 9:
+					CrearTablas.crearTorneo(connection);
 					break;
 				case 10:
 					break;
@@ -195,5 +199,53 @@ public class CrearTablas {
 		System.out.println("Introduce la raza");
 		miRazaVO.setRaza(Raza.valueOf(sc.nextLine()));
 		miRazaDAO.registrar(miRazaVO, connection);
+	}
+	
+	public static void crearServidor(DbConnection connection) throws ClassNotFoundException, SQLException {
+		ServidorDAO miServidorDAO = new ServidorDAO();
+		ServidorVO miServidorVO = new ServidorVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el id");
+		int numero = Integer.parseInt(sc.nextLine());
+		miServidorVO.setId(numero);
+		miServidorVO.getId();
+		System.out.println("Introduce el nombre");
+		miServidorVO.setNombre(sc.nextLine());
+		System.out.println("Introduce el pais (EJ)");
+		miServidorVO.setPais(sc.nextLine());
+		System.out.println("Introduce el numero maximo de jugadores");
+		numero = Integer.parseInt(sc.nextLine());
+		miServidorVO.setMax(numero);
+		miServidorDAO.registrar(miServidorVO, connection);
+	}
+	
+	public static void crearTorneo(DbConnection connection) throws ClassNotFoundException, SQLException {
+		TorneoDAO miTorneoDAO = new TorneoDAO();
+		TorneoVO miTorneoVO = new TorneoVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el nombre");
+		miTorneoVO.setNombre(sc.nextLine());
+		System.out.println("Introduce el numero de la liga (1-7)");
+		int numero = Integer.parseInt(sc.nextLine());
+		miTorneoVO.setLiga(numero);
+		System.out.println("Introduce el premio");
+		miTorneoVO.setPremio(sc.nextLine());
+		System.out.println("Introduce el anio de inicio");
+		numero = Integer.parseInt(sc.nextLine());
+		System.out.println("Introduce el mes de inicio");
+		int numero2 = Integer.parseInt(sc.nextLine());
+		System.out.println("Introduce el dia de inicio");
+		int numero3 = Integer.parseInt(sc.nextLine());
+		Date inicio = new Date(numero, numero2, numero3);
+		System.out.println("Introduce el anio de fin");
+		numero = Integer.parseInt(sc.nextLine());
+		System.out.println("Introduce el mes de fin");
+		numero2 = Integer.parseInt(sc.nextLine());
+		System.out.println("Introduce el dia de fin");
+		numero3 = Integer.parseInt(sc.nextLine());
+		Date fin = new Date(numero, numero2, numero3);
+		miTorneoVO.setInicio(inicio);
+		miTorneoVO.setFin(fin);
+		miTorneoDAO.registrar(miTorneoVO, connection);
 	}
 }
