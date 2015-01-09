@@ -108,6 +108,11 @@ public class LogroDAO {
 		try {
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet res = statement.executeQuery("SELECT * FROM logro WHERE id = " + id);
+			while (res.next()) {
+				System.out.println("Id: " + res.getInt("id") + ", Nombre: "
+						+ res.getString("nombre") + ", Descripcion: "
+						+ res.getString("descripcion"));
+			}
 			System.out.println("Introduce el nombre de el campo que quieres cambiar: ");
 			System.out.println("id, nombre, descripcion");
 			Scanner sc = new Scanner(System.in);

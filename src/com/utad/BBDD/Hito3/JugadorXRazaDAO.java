@@ -7,19 +7,22 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
- * clase cuyos metodos añaden, borran, ven y modifican tuplas de la tabla jugadorxraza
+ * clase cuyos metodos añaden, borran, ven y modifican tuplas de la tabla
+ * jugadorxraza
  * 
  * @see JugadorXRazaVO
  * 
  */
 
 public class JugadorXRazaDAO {
-	
+
 	/**
 	 * permite insertar una tupla en la tabla jugadorxraza
 	 * 
-	 * @param JugadorXRazaVO fila
-	 * @param DbConnection connection
+	 * @param JugadorXRazaVO
+	 *            fila
+	 * @param DbConnection
+	 *            connection
 	 * @return void
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
@@ -29,16 +32,13 @@ public class JugadorXRazaDAO {
 		try {
 			Statement statement = connection.getConnection().createStatement();
 			statement.executeUpdate("INSERT INTO jugadorxraza VALUES ('"
-					+ fila.getId() + "', '" 
-					+ fila.getNombre() + "','"
-					+ fila.getGanadas() + "','"
-					+ fila.getPerdidas()
-							+ ")");
+					+ fila.getId() + "', '" + fila.getRaza() + "','"
+					+ fila.getGanadas() + "','" + fila.getPerdidas() + ")");
 			JOptionPane.showMessageDialog(null,
 					"Se ha registrado Exitosamente", "Información",
 					JOptionPane.INFORMATION_MESSAGE);
 			statement.close();
-//			connection.close();
+			// connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null,
@@ -49,7 +49,8 @@ public class JugadorXRazaDAO {
 	/**
 	 * permite consultar todas las tuplas de la tabla jugadorxperiodoxraza
 	 * 
-	 * @param DbConnection connection
+	 * @param DbConnection
+	 *            connection
 	 * @return ArrayList<JugadorXRaza
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
@@ -59,18 +60,18 @@ public class JugadorXRazaDAO {
 		ArrayList<JugadorXRazaVO> jugadores = new ArrayList<JugadorXRazaVO>();
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			ResultSet res = statement.executeQuery("SELECT * FROM jugadorxraza");
+			ResultSet res = statement
+					.executeQuery("SELECT * FROM jugadorxraza");
 
 			while (res.next()) {
-				jugadores.add(new JugadorXRazaVO(res.getInt("id"), res
-						.getInt("nombre"), res
-						.getInt("ganadas"), res
-						.getInt("perdidas")
-						));
+				String nombreRaza = res.getString("nombre");
+				Raza miRaza = Raza.valueOf(nombreRaza);
+				jugadores.add(new JugadorXRazaVO(res.getInt("id"), miRaza, res
+						.getInt("ganadas"), res.getInt("perdidas")));
 			}
 			res.close();
 			statement.close();
-//			connection.close();
+			// connection.close();
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
@@ -78,11 +79,12 @@ public class JugadorXRazaDAO {
 		}
 		return jugadores;
 	}
-	
+
 	/**
 	 * permite borrar una tupla en la tabla jugadorxraza
 	 * 
-	 * @param DbConnection connection
+	 * @param DbConnection
+	 *            connection
 	 * @param int id
 	 * @param int nombre
 	 * @paran int ganadas
@@ -91,13 +93,14 @@ public class JugadorXRazaDAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public void borrar(DbConnection connection, int id,int nombre, int ganadas,int perdidas)
-			throws SQLException, ClassNotFoundException {
+	public void borrar(DbConnection connection, int id, int nombre) throws SQLException,
+			ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("DELETE FROM jugadorxraza WHERE id = " + id + "AND nombre = " + nombre);
+			statement.executeUpdate("DELETE FROM jugadorxraza WHERE id = " + id
+					+ "AND nombre = " + nombre);
 			statement.close();
-//			connection.close();
+			// connection.close();
 		} catch (SQLException e) {
 			System.out.println("Error" + e);
 		}

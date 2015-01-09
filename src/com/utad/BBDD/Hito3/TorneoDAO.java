@@ -126,6 +126,13 @@ public class TorneoDAO {
 			ResultSet res = statement
 					.executeQuery("SELECT * FROM torneo WHERE nombre = '"
 							+ nombre + "' AND liga = '" + liga + "'");
+			while (res.next()) {
+				System.out.println("Nombre: " + res.getString("nombre") + ", Liga: "
+						+ res.getInt("liga") + ", Premio: "
+						+ res.getString("premio") + ", Inicio: "
+						+ res.getString("inicio") + ", Fin: "
+						+ res.getString("fin"));
+			}
 			System.out
 					.println("Introduce el nombre de el campo que quieres cambiar: ");
 			System.out.println("nombre, liga, premio, inicio, fin");

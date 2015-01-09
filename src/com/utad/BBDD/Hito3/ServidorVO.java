@@ -1,5 +1,4 @@
 package com.utad.BBDD.Hito3;
-import java.sql.Date;
 import java.sql.SQLException;
 
 /**

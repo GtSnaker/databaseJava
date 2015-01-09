@@ -108,7 +108,11 @@ public class JugadorXJugadorDAO {
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			ResultSet res = statement.executeQuery("SELECT * FROM jugadorxjugador WHERE id = " + id);
+			ResultSet res = statement.executeQuery("SELECT * FROM jugadorxjugador WHERE id = " + id + " AND id2 = " + id2);
+			while (res.next()) {
+				System.out.println("Id: " + res.getInt("id") + ", Id2: "
+						+ res.getInt("id2"));
+			}
 			System.out.println("Introduce el nombre de el campo que quieres cambiar: ");
 			System.out.println("id, id2");
 			Scanner sc = new Scanner(System.in);

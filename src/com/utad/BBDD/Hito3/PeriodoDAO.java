@@ -106,9 +106,13 @@ public class PeriodoDAO {
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet res = statement
 					.executeQuery("SELECT * FROM periodo WHERE inicio = " + inicio + " AND fin = " + fin);
+			while (res.next()) {
+				System.out.println("Inicio: " + res.getString("inicio") + ", Fin: "
+						+ res.getString("fin"));
+			}
 			System.out
 					.println("Introduce el nombre de el campo que quieres cambiar: ");
-			System.out.println("id, nombre, descripcion");
+			System.out.println("inicio, fin");
 			Scanner sc = new Scanner(System.in);
 			String columna = sc.nextLine();
 			if (columna.equals("inicio") || columna.equals("fin")) {

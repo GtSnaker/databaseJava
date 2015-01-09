@@ -131,8 +131,6 @@ public class JugadorDAO {
 						+ res.getString("battletag")
 						+ ", Password: **********, Liga: " + res.getInt("liga"));
 			}
-			
-
 			System.out
 					.println("Introduce el nombre de el campo que quieres cambiar: ");
 			System.out

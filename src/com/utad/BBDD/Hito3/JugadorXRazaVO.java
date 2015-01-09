@@ -9,22 +9,22 @@ import java.sql.SQLException;
 
 public class JugadorXRazaVO {
 	private int id;
-	private int nombre;
+	private Raza raza;
 	private int ganadas;
 	private int perdidas;
 	
 	public JugadorXRazaVO(){
 		id = -1;
-		nombre = -1;
+		raza = null;
 		ganadas = -1;
 		perdidas = -1;
 	}
 
-	public JugadorXRazaVO(int id, int nombre, int ganadas, int perdidas) {
+	public JugadorXRazaVO(int id, Raza raza, int ganadas, int perdidas) {
 		super();
 		this.id = id;
 		this.ganadas = ganadas;
-		this.nombre = nombre;
+		this.raza = raza;
 		this.perdidas = perdidas;
 	}
 
@@ -36,12 +36,12 @@ public class JugadorXRazaVO {
 		this.id = id;
 	}
 
-	public int getNombre() {
-		return nombre;
+	public Raza getRaza() {
+		return raza;
 	}
 
-	public void setNombre(int nombre) {
-		this.nombre = nombre;
+	public void setRaza(Raza raza) {
+		this.raza = raza;
 	}
 
 	public int getGanadas() {
@@ -60,9 +60,6 @@ public class JugadorXRazaVO {
 		this.perdidas = perdidas;
 	}
 
-	
-	
-	
-	
+
 	
 }
