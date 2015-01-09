@@ -65,7 +65,7 @@ public class TorneoDAO {
 			while (res.next()) {
 				jugadores.add(new TorneoVO(res.getString("nombre"), res
 						.getInt("liga"), res.getString("premio"), res
-						.getDate("inicio"), res.getDate("fin")));
+						.getString("inicio"), res.getString("fin")));
 			}
 			res.close();
 			statement.close();

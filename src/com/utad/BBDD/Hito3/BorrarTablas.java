@@ -125,38 +125,12 @@ public class BorrarTablas {
 	public static void borrarPeriodo(DbConnection connection) throws ClassNotFoundException, SQLException {
 		PeriodoDAO miPeriodoDAO = new PeriodoDAO();
 		Scanner sc = new Scanner(System.in);	
-		System.out.println("Introdce el año del inicio: ");
-		int anio = sc.nextInt();
-		System.out.println("Introdce el mes del inicio: ");
-		int mes = sc.nextInt();
-		System.out.println("Introdce el dia del inicio: ");
-		int dia = sc.nextInt();
-		System.out.println("Introdce la hora del inicio: ");
-		int hora = sc.nextInt();
-		System.out.println("Introdce el minuto del inicio: ");
-		int minuto = sc.nextInt();
-		System.out.println("Introdce el segundo del inicio: ");
-		int segundo = sc.nextInt();
-		System.out.println("Introdce el nano del inicio: ");
-		int nano = sc.nextInt();
-		Timestamp dato = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
-		System.out.println("Introdce el año del fin: ");
-		anio = sc.nextInt();
-		System.out.println("Introdce el mes del fin: ");
-		mes = sc.nextInt();
-		System.out.println("Introdce el dia del fin: ");
-		dia = sc.nextInt();
-		System.out.println("Introdce la hora del fin: ");
-		hora = sc.nextInt();
-		System.out.println("Introdce el minuto del fin: ");
-		minuto = sc.nextInt();
-		System.out.println("Introdce el segundo del fin: ");
-		segundo = sc.nextInt();
-		System.out.println("Introdce el nano del fin: ");
-		nano = sc.nextInt();
-		Timestamp dato2 = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
-		miPeriodoDAO.borrar(connection, dato, dato2);
-		System.out.println("Se ha borrado el periodo con inicio: " + dato + " y fin: " + dato2);
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		String inicio = (sc.nextLine());
+		System.out.println("Introduce la fecha de fin: YY-MM-DD HH24:MM:SS");
+		String fin = (sc.nextLine());
+		miPeriodoDAO.borrar(connection, inicio, fin);
+		System.out.println("Se ha borrado el periodo con inicio: " + inicio + " y fin: " + fin);
 	}
 	
 	public static void borrarRaza(DbConnection connection) throws ClassNotFoundException, SQLException {

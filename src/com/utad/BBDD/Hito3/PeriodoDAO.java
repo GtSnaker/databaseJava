@@ -3,7 +3,6 @@ package com.utad.BBDD.Hito3;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,10 +53,9 @@ public class PeriodoDAO {
 		try {
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet res = statement.executeQuery("SELECT * FROM periodo");
-
 			while (res.next()) {
-				periodos.add(new PeriodoVO(res.getTimestamp("inicio"), res
-						.getTimestamp("fin")));
+				periodos.add(new PeriodoVO(res.getString("inicio"), res
+						.getString("fin")));
 			}
 			res.close();
 			statement.close();
@@ -80,7 +78,7 @@ public class PeriodoDAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public void borrar(DbConnection connection, Timestamp inicio, Timestamp fin) throws SQLException,
+	public void borrar(DbConnection connection, String inicio, String fin) throws SQLException,
 			ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
@@ -102,7 +100,7 @@ public class PeriodoDAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public void modificar(DbConnection connection, Timestamp inicio, Timestamp fin) throws SQLException,
+	public void modificar(DbConnection connection, String inicio, String fin) throws SQLException,
 			ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
@@ -115,21 +113,8 @@ public class PeriodoDAO {
 			String columna = sc.nextLine();
 			if (columna.equals("inicio") || columna.equals("fin")) {
 //				int year, int month, int date, int hour, int minute, int second, int nano
-				System.out.println("Introdce el año: ");
-				int anio = sc.nextInt();
-				System.out.println("Introdce el mes: ");
-				int mes = sc.nextInt();
-				System.out.println("Introdce el dia: ");
-				int dia = sc.nextInt();
-				System.out.println("Introdce la hora: ");
-				int hora = sc.nextInt();
-				System.out.println("Introdce el minuto: ");
-				int minuto = sc.nextInt();
-				System.out.println("Introdce el segundo: ");
-				int segundo = sc.nextInt();
-				System.out.println("Introdce el nano: ");
-				int nano = sc.nextInt();
-				Timestamp valor = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
+				System.out.println("Introduce la fecha: YY-MM-DD HH24:MI:SS");
+				String valor = sc.nextLine();
 				statement.executeUpdate("UPDATE periodo SET " + columna + " = " + valor + " WHERE inicio = " + inicio + " AND fin = " + fin);
 			} else {
 				System.out.println("Introduce uno de los valores aceptados.");

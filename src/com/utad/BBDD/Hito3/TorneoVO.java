@@ -11,8 +11,8 @@ public class TorneoVO {
 	private String nombre;
 	private int liga;
 	private String premio;
-	private Date inicio;
-	private Date fin;
+	private String inicio;
+	private String fin;
 	
 	public TorneoVO(){
 		nombre = "null";
@@ -22,7 +22,7 @@ public class TorneoVO {
 		fin = null;
 	}
 
-	public TorneoVO(String nombre, int liga, String premio, Date inicio, Date fin) {
+	public TorneoVO(String nombre, int liga, String premio, String inicio, String fin) {
 		super();
 		this.nombre =  nombre;
 		this.liga = liga;
@@ -55,19 +55,19 @@ public class TorneoVO {
 		this.premio = premio;
 	}
 
-	public Date getInicio() {
+	public String getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Date inicio) {
+	public void setInicio(String inicio) {
 		this.inicio = inicio;
 	}
 
-	public Date getFin() {
+	public String getFin() {
 		return fin;
 	}
 
-	public void setFin(Date fin) {
+	public void setFin(String fin) {
 		this.fin = fin;
 	}
 

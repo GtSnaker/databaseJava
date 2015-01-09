@@ -10,7 +10,7 @@ public class JugadorVO {
 	private int id;
 	private String nombre;
 	private String apellido;
-	private Date edad;
+	private String edad;
 	private String pais;
 	private String mail;
 	private String battletag;
@@ -37,7 +37,7 @@ public class JugadorVO {
 		liga = -1;
 	}
 
-	public JugadorVO(int id, String nombre, String apellido, Date edad,
+	public JugadorVO(int id, String nombre, String apellido, String edad,
 			String pais, String mail, String battletag, String password,  int liga) {
 		super();
 		this.id = id;
@@ -75,11 +75,11 @@ public class JugadorVO {
 		this.apellido = apellido;
 	}
 
-	public Date getEdad() {
+	public String getEdad() {
 		return edad;
 	}
 
-	public void setEdad(Date edad) {
+	public void setEdad(String edad) {
 		this.edad = edad;
 	}
 

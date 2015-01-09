@@ -2,33 +2,34 @@ package com.utad.BBDD.Hito3;
 import java.sql.Timestamp;
 
 public class PeriodoVO {
-	private Timestamp inicio;
-	private Timestamp fin;
+	private String inicio;
+	private String fin;
 	
-	public Timestamp getInicio() {
-		return inicio;
-	}
-
-	public void setInicio(Timestamp inicio) {
-		this.inicio = inicio;
-	}
-
-	public Timestamp getFin() {
-		return fin;
-	}
-
-	public void setFin(Timestamp fin) {
-		this.fin = fin;
-	}
-
 	public PeriodoVO(){
-		inicio = null;
-		fin = null;
+		inicio = "null";
+		fin = "null";
 	}
 	
-	public PeriodoVO(Timestamp inicio, Timestamp fin) {
+	public PeriodoVO(String inicio, String fin) {
 		super();
 		this.inicio = inicio;
 		this.fin = fin;
 	}
+
+	public String getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(String inicio) {
+		this.inicio = inicio;
+	}
+
+	public String getFin() {
+		return fin;
+	}
+
+	public void setFin(String fin) {
+		this.fin = fin;
+	}
+	
 }

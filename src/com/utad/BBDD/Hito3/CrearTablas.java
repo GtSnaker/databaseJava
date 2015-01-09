@@ -2,7 +2,6 @@ package com.utad.BBDD.Hito3;
 
 import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Scanner;
 
 /**
@@ -85,9 +84,8 @@ public class CrearTablas {
 		miJugadorVO.setNombre(sc.nextLine());
 		System.out.println("Introduce el apellido");
 		miJugadorVO.setApellido(sc.nextLine());
-		System.out.println("Introduce la edad");
-		Date miDate = new Date(1991, 1, 4);
-		miJugadorVO.setEdad(miDate);
+		System.out.println("Introduce la edad: YY-MM-DD HH24:MM:SS");
+		miJugadorVO.setEdad(sc.nextLine());
 		System.out.println("Introduce el pais");
 		miJugadorVO.setPais(sc.nextLine());
 		System.out.println("Introduce el mail");
@@ -157,38 +155,10 @@ public class CrearTablas {
 		PeriodoDAO miPeriodoDAO = new PeriodoDAO();
 		PeriodoVO miPeriodoVO = new PeriodoVO();
 		Scanner sc = new Scanner(System.in);	
-		System.out.println("Introdce el año del inicio: ");
-		int anio = sc.nextInt();
-		System.out.println("Introdce el mes del inicio: ");
-		int mes = sc.nextInt();
-		System.out.println("Introdce el dia del inicio: ");
-		int dia = sc.nextInt();
-		System.out.println("Introdce la hora del inicio: ");
-		int hora = sc.nextInt();
-		System.out.println("Introdce el minuto del inicio: ");
-		int minuto = sc.nextInt();
-		System.out.println("Introdce el segundo del inicio: ");
-		int segundo = sc.nextInt();
-		System.out.println("Introdce el nano del inicio: ");
-		int nano = sc.nextInt();
-		Timestamp dato = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
-		miPeriodoVO.setInicio(dato);
-		System.out.println("Introdce el año del fin: ");
-		anio = sc.nextInt();
-		System.out.println("Introdce el mes del fin: ");
-		mes = sc.nextInt();
-		System.out.println("Introdce el dia del fin: ");
-		dia = sc.nextInt();
-		System.out.println("Introdce la hora del fin: ");
-		hora = sc.nextInt();
-		System.out.println("Introdce el minuto del fin: ");
-		minuto = sc.nextInt();
-		System.out.println("Introdce el segundo del fin: ");
-		segundo = sc.nextInt();
-		System.out.println("Introdce el nano del fin: ");
-		nano = sc.nextInt();
-		dato = new Timestamp(anio, mes, dia, hora, minuto, segundo, nano);
-		miPeriodoVO.setFin(dato);
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		miPeriodoVO.setInicio(sc.nextLine());
+		System.out.println("Introduce la fecha de fin: YY-MM-DD HH24:MM:SS");
+		miPeriodoVO.setFin(sc.nextLine());
 		miPeriodoDAO.registrar(miPeriodoVO, connection);
 	}
 	
@@ -223,29 +193,10 @@ public class CrearTablas {
 		TorneoDAO miTorneoDAO = new TorneoDAO();
 		TorneoVO miTorneoVO = new TorneoVO();
 		Scanner sc = new Scanner(System.in);	
-		System.out.println("Introduce el nombre");
-		miTorneoVO.setNombre(sc.nextLine());
-		System.out.println("Introduce el numero de la liga (1-7)");
-		int numero = Integer.parseInt(sc.nextLine());
-		miTorneoVO.setLiga(numero);
-		System.out.println("Introduce el premio");
-		miTorneoVO.setPremio(sc.nextLine());
-		System.out.println("Introduce el anio de inicio");
-		numero = Integer.parseInt(sc.nextLine());
-		System.out.println("Introduce el mes de inicio");
-		int numero2 = Integer.parseInt(sc.nextLine());
-		System.out.println("Introduce el dia de inicio");
-		int numero3 = Integer.parseInt(sc.nextLine());
-		Date inicio = new Date(numero, numero2, numero3);
-		System.out.println("Introduce el anio de fin");
-		numero = Integer.parseInt(sc.nextLine());
-		System.out.println("Introduce el mes de fin");
-		numero2 = Integer.parseInt(sc.nextLine());
-		System.out.println("Introduce el dia de fin");
-		numero3 = Integer.parseInt(sc.nextLine());
-		Date fin = new Date(numero, numero2, numero3);
-		miTorneoVO.setInicio(inicio);
-		miTorneoVO.setFin(fin);
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		miTorneoVO.setInicio(sc.nextLine());
+		System.out.println("Introduce la fecha de fin: YY-MM-DD HH24:MM:SS");
+		miTorneoVO.setFin(sc.nextLine());
 		miTorneoDAO.registrar(miTorneoVO, connection);
 	}
 }
