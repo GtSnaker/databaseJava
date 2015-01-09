@@ -30,7 +30,7 @@ public class ModificarTablas {
 				case 2:
 					ModificarTablas.modificarLiga(connection);
 					break;
-				case 3:
+				case 3:	
 					ModificarTablas.modificarJugadorXJugador(connection);
 					break;
 				case 4:
@@ -52,14 +52,19 @@ public class ModificarTablas {
 					ModificarTablas.modificarTorneo(connection);
 					break;
 				case 10:
+					ModificarTablas.modificarJugadorXPeriodoXMapaXServidor(connection);
 					break;
 				case 11:
+					ModificarTablas.modificarJugadorXRaza(connection);
 					break;
 				case 12:
+					ModificarTablas.modificarJugadorXServidor(connection);
 					break;
 				case 13:
+					ModificarTablas.modificarJugadorXTorneo(connection);
 					break;
 				case 14:
+					ModificarTablas.modificarJugadorXLogro(connection);
 					break;
 				}
 			}
@@ -190,5 +195,15 @@ public class ModificarTablas {
 		System.out.println("Introduce el nombre: ");
 		String nombre = sc.nextLine();
 		miJugadorXTorneoDAO.modificar(connection, id , nombre);
+	}
+	
+	public static void modificarJugadorXLogro(DbConnection connection) throws ClassNotFoundException, SQLException{
+		JugadorXLogroDAO miJugadorXLogroDAO = new JugadorXLogroDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el idJugador : ");
+		int idJugador = sc.nextInt();
+		System.out.println("Introduce el idLogro: ");
+		int idLogro = sc.nextInt();
+		miJugadorXLogroDAO.modificar(connection, idJugador , idLogro);
 	}
 }

@@ -59,14 +59,19 @@ public class BorrarTablas {
 					BorrarTablas.borrarTorneo(connection);
 					break;
 				case 10:
+					BorrarTablas.borrarJugadorXPeriodoXMapaXServidor(connection);
 					break;
 				case 11:
+					BorrarTablas.borrarJugadorXRaza(connection);
 					break;
 				case 12:
+					BorrarTablas.borrarJugadorXServidor(connection);
 					break;
 				case 13:
+					BorrarTablas.borrarJugadorXTorneo(connection);
 					break;
 				case 14:
+					BorrarTablas.borrarJugadorXLogro(connection);
 					break;
 				}
 			}
@@ -207,5 +212,16 @@ public class BorrarTablas {
 		String nombre = (sc.nextLine());
 		miJugadorXTorneoDAO.borrar(connection, id, nombre);
 		System.out.println("Se ha borrado el jugadorxtorneo con id: " + id + " con idServidor: "+ id + " exitosamente.");
+	}
+	
+	public static void borrarJugadorXLogro(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXLogroDAO miJugadorXLogroDAO = new JugadorXLogroDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el idJugador: ");
+		int idJugador = sc.nextInt();
+		System.out.println("Introduce el idLogro: ");
+		int idLogro = sc.nextInt();
+		miJugadorXLogroDAO.borrar(connection, idJugador, idLogro);
+		System.out.println("Se ha borrado el jugadorxlogro con idJugador: " + idJugador + " con idServidor: "+ idLogro + " exitosamente.");
 	}
 }

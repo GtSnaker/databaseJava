@@ -58,14 +58,19 @@ public class CrearTablas {
 					CrearTablas.crearTorneo(connection);
 					break;
 				case 10:
+					CrearTablas.crearJugadorXPeriodoXMapaXServidor(connection);
 					break;
 				case 11:
+					CrearTablas.crearJugadorXRaza(connection);
 					break;
 				case 12:
+					CrearTablas.crearJugadorXServidor(connection);
 					break;
 				case 13:
+					CrearTablas.crearJugadorXTorneo(connection);
 					break;
 				case 14:
+					CrearTablas.crearJugadorXLogro(connection);
 					break;
 				}
 			}
@@ -256,5 +261,16 @@ public class CrearTablas {
 		System.out.println("Introduce el nombre");
 		miJugadorXTorneoVO.setNombre(sc.nextLine());
 		miJugadorXTorneoDAO.registrar(miJugadorXTorneoVO, connection);
+	}
+	
+	public static void crearJugadorXLogro(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXLogroDAO miJugadorXLogroDAO = new JugadorXLogroDAO();
+		JugadorXLogroVO miJugadorXLogroVO = new JugadorXLogroVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el idJugador");
+		miJugadorXLogroVO.setIdJugador(sc.nextInt());
+		System.out.println("Introduce el idLogro");
+		miJugadorXLogroVO.setIdLogro(sc.nextInt());
+		miJugadorXLogroDAO.registrar(miJugadorXLogroVO, connection);
 	}
 }
