@@ -11,8 +11,8 @@ public class JugadorXPeriodoXMapaXServidorVO {
 	private int idJugador;
 	private int idMapa;
 	private int idServidor;
-	private Date inicio;
-	private Date fin;
+	private String inicio;
+	private String fin;
 	private int ganador;
 	
 	public JugadorXPeriodoXMapaXServidorVO(){
@@ -24,7 +24,7 @@ public class JugadorXPeriodoXMapaXServidorVO {
 		ganador = -1;
 	}
 
-	public JugadorXPeriodoXMapaXServidorVO(int idJugador,int idMapa,int idServidor,Date inicio,Date fin,int ganador) {
+	public JugadorXPeriodoXMapaXServidorVO(int idJugador,int idMapa,int idServidor,String inicio,String fin,int ganador) {
 		super();
 		this.idJugador = idJugador;
 		this.idMapa = idMapa;
@@ -58,19 +58,19 @@ public class JugadorXPeriodoXMapaXServidorVO {
 		this.idServidor = idServidor;
 	}
 
-	public Date getInicio() {
+	public String getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Date inicio) {
+	public void setInicio(String inicio) {
 		this.inicio = inicio;
 	}
 
-	public Date getFin() {
+	public String getFin() {
 		return fin;
 	}
 
-	public void setFin(Date fin) {
+	public void setFin(String fin) {
 		this.fin = fin;
 	}
 

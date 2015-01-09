@@ -243,5 +243,74 @@ public class VerTablas {
 			System.out.println("No se pudo consultar.");
 		}
 	}
+	
+	public static void verJugadorXPeriodoXMapaXServidor(DbConnection connection)
+			throws ClassNotFoundException, SQLException {
+		JugadorXPeriodoXMapaXServidorDAO miJugadorXPeriodoXMapaXServidorDAO = new JugadorXPeriodoXMapaXServidorDAO();
+		JugadorXPeriodoXMapaXServidorVO miJugadorXPeriodoXMapaXServidor;
+		ArrayList<JugadorXPeriodoXMapaXServidorVO> jugadores = miJugadorXPeriodoXMapaXServidorDAO
+				.ver(connection);
+		if (jugadores.size() > 0) {
+			for (int i = 0; i < jugadores.size(); i++) {
+				miJugadorXPeriodoXMapaXServidor = jugadores.get(i);
+				System.out.println("IdJugador: " + miJugadorXPeriodoXMapaXServidor.getIdJugador()
+						+ ", IdMapa: " + miJugadorXPeriodoXMapaXServidor.getIdMapa()
+						+ ", IdServidor: " +  miJugadorXPeriodoXMapaXServidor.getIdServidor()
+						+ ", Inicio: " + miJugadorXPeriodoXMapaXServidor.getInicio()
+						+ ", Fin:" + miJugadorXPeriodoXMapaXServidor.getFin()
+						+ ", Ganador:" + miJugadorXPeriodoXMapaXServidor.getGanador()
+						);
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+		
+		
+	}
+	
+	public static void verJugadorXServidor(DbConnection connection)
+			throws ClassNotFoundException, SQLException {
+		JugadorXServidorDAO miJugadorXServidorDAO = new JugadorXServidorDAO();
+		JugadorXServidorVO miJugadorXServidor;
+		ArrayList<JugadorXServidorVO> jugadores = miJugadorXServidorDAO
+				.ver(connection);
+		if (jugadores.size() > 0) {
+			for (int i = 0; i < jugadores.size(); i++) {
+				miJugadorXServidor = jugadores.get(i);
+				System.out.println("IdJugador: " + miJugadorXServidor.getIdJugador()
+						+ ", IdServidor: " + miJugadorXServidor.getIdServidor()
+						+ ", Inicio: " + miJugadorXServidor.getInicio()
+						+ ", Fin:" + miJugadorXServidor.getFin()
+						);
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+		
+		
+	}
+	
+	public static void verJugadorXTorneo(DbConnection connection)
+			throws ClassNotFoundException, SQLException {
+		JugadorXTorneoDAO miJugadorXTorneoDAO = new JugadorXTorneoDAO();
+		JugadorXTorneoVO miJugadorXTorneo;
+		ArrayList<JugadorXTorneoVO> jugadores = miJugadorXTorneoDAO
+				.ver(connection);
+		if (jugadores.size() > 0) {
+			for (int i = 0; i < jugadores.size(); i++) {
+				miJugadorXTorneo = jugadores.get(i);
+				System.out.println("Id: " + miJugadorXTorneo.getId()
+						+ ", Nombre:: " + miJugadorXTorneo.getNombre()
+						);
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+		
+		
+	}
 
 }

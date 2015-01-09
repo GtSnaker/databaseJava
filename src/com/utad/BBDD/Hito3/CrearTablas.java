@@ -199,4 +199,62 @@ public class CrearTablas {
 		miTorneoVO.setFin(sc.nextLine());
 		miTorneoDAO.registrar(miTorneoVO, connection);
 	}
+	
+	public static void crearJugadorXPeriodoXMapaXServidor(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXPeriodoXMapaXServidorDAO miJugadorXPeriodoXMapaXServidorDAO = new JugadorXPeriodoXMapaXServidorDAO();
+		JugadorXPeriodoXMapaXServidorVO miJugadorXPeriodoXMapaXServidorVO = new JugadorXPeriodoXMapaXServidorVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el idJugador");
+		miJugadorXPeriodoXMapaXServidorVO.setIdJugador(sc.nextInt());
+		System.out.println("Introduce el idMapa");
+		miJugadorXPeriodoXMapaXServidorVO.setIdMapa(sc.nextInt());
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		miJugadorXPeriodoXMapaXServidorVO.setInicio(sc.nextLine());
+		System.out.println("Introduce la fecha de fin: YY-MM-DD HH24:MM:SS");
+		miJugadorXPeriodoXMapaXServidorVO.setFin(sc.nextLine());
+		miJugadorXPeriodoXMapaXServidorDAO.registrar(miJugadorXPeriodoXMapaXServidorVO, connection);
+	}
+	
+	public static void crearJugadorXRaza(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXRazaDAO miJugadorXRazaDAO = new JugadorXRazaDAO();
+		JugadorXRazaVO miJugadorXRazaVO = new JugadorXRazaVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el idJugador");
+		miJugadorXRazaVO.setId(sc.nextInt());
+		System.out.println("Introduce el nombre");
+		String nombre = sc.nextLine();
+		Raza miRaza = Raza.valueOf(nombre);
+		miJugadorXRazaVO.setRaza(miRaza);
+		System.out.println("Introduce el numero de ganadas");
+		miJugadorXRazaVO.setGanadas(sc.nextInt());
+		System.out.println("Introduce el numero de sc.perdidas");
+		miJugadorXRazaVO.setPerdidas(sc.nextInt());
+		miJugadorXRazaDAO.registrar(miJugadorXRazaVO, connection);
+	}
+	
+	public static void crearJugadorXServidor(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXServidorDAO miJugadorXServidorDAO = new JugadorXServidorDAO();
+		JugadorXServidorVO miJugadorXServidorVO = new JugadorXServidorVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el idJugador");
+		miJugadorXServidorVO.setIdJugador(sc.nextInt());
+		System.out.println("Introduce el idServidor");
+		miJugadorXServidorVO.setIdServidor(sc.nextInt());
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		miJugadorXServidorVO.setInicio(sc.nextLine());
+		System.out.println("Introduce la fecha de fin: YY-MM-DD HH24:MM:SS");
+		miJugadorXServidorVO.setFin(sc.nextLine());
+		miJugadorXServidorDAO.registrar(miJugadorXServidorVO, connection);
+	}
+	
+	public static void crearJugadorXTorneo(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXTorneoDAO miJugadorXTorneoDAO = new JugadorXTorneoDAO();
+		JugadorXTorneoVO miJugadorXTorneoVO = new JugadorXTorneoVO();
+		Scanner sc = new Scanner(System.in);	
+		System.out.println("Introduce el id");
+		miJugadorXTorneoVO.setId(sc.nextInt());
+		System.out.println("Introduce el nombre");
+		miJugadorXTorneoVO.setNombre(sc.nextLine());
+		miJugadorXTorneoDAO.registrar(miJugadorXTorneoVO, connection);
+	}
 }

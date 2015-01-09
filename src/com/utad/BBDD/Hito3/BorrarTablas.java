@@ -161,4 +161,51 @@ public class BorrarTablas {
 		miTorneoDAO.borrar(connection, nombre, liga);
 		System.out.println("Se ha borrado el torneo con nombre: " + nombre + " y liga: " + liga);
 	}
+	
+	public static void borrarJugadorXPeriodoXMapaXServidor(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXPeriodoXMapaXServidorDAO miJugadorXPeriodoXMapaXServidorDAO = new JugadorXPeriodoXMapaXServidorDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id de el jugador creador de la batalla que quieres eliminar: ");
+		int idJugador = sc.nextInt();
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		String inicio = (sc.nextLine());
+		miJugadorXPeriodoXMapaXServidorDAO.borrar(connection, idJugador, inicio);
+		System.out.println("Se ha borrado el jugadorxperiodoxmapaxservidor con idJugador: " + idJugador + " inicio: "+ inicio+" exitosamente.");
+	}
+	
+	public static void borrarJugadorXRaza(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXRazaDAO miJugadorXRazaDAO = new JugadorXRazaDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id del jugador  que quieres eliminar: ");
+		int id = sc.nextInt();
+		System.out.println("Introduce el id del nombre de la raza de la fila que quieres eliminar: ");
+		String nombre = sc.nextLine();
+		Raza miRaza = Raza.valueOf(nombre);
+		miJugadorXRazaDAO.borrar(connection, id, miRaza);
+		System.out.println("Se ha borrado el jugadorxRaza con idJugador: " + id + " con raza: "+ miRaza +" exitosamente.");
+	}
+	
+	public static void borrarJugadorXServidor(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXServidorDAO miJugadorXServidorDAO = new JugadorXServidorDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id del jugador de la fila que quieres eliminar: ");
+		int idJugador = sc.nextInt();
+		System.out.println("Introduce el id del servidor de la fila que quieres eliminar: ");
+		int idServidor = sc.nextInt();
+		System.out.println("Introduce la fecha de inicio: YY-MM-DD HH24:MM:SS");
+		String inicio = (sc.nextLine());
+		miJugadorXServidorDAO.borrar(connection, idJugador, idServidor, inicio);
+		System.out.println("Se ha borrado el jugadorxservidor con idJugador: " + idJugador + " con idServidor: "+ idServidor + "con inicio:" + inicio + " exitosamente.");
+	}
+	
+	public static void borrarJugadorXTorneo(DbConnection connection) throws ClassNotFoundException, SQLException {
+		JugadorXTorneoDAO miJugadorXTorneoDAO = new JugadorXTorneoDAO();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el id de la fila que quieres eliminar: ");
+		int id = sc.nextInt();
+		System.out.println("Introduceel nombre del torneo de la fila que quieres eliminar");
+		String nombre = (sc.nextLine());
+		miJugadorXTorneoDAO.borrar(connection, id, nombre);
+		System.out.println("Se ha borrado el jugadorxtorneo con id: " + id + " con idServidor: "+ id + " exitosamente.");
+	}
 }

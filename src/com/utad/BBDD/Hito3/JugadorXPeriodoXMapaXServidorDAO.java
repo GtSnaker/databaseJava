@@ -96,7 +96,7 @@ public class JugadorXPeriodoXMapaXServidorDAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public void borrar(DbConnection connection, int idJugador,int idMapa, int idServidor, Date inicio, Date fin, int ganador)
+	public void borrar(DbConnection connection, int idJugador, String inicio)
 			throws SQLException, ClassNotFoundException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
