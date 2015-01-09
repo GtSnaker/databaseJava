@@ -22,6 +22,11 @@ public class BorrarTablas {
 		System.out.println("7 para borrar RAZA");
 		System.out.println("8 para borrar SERVIDOR");
 		System.out.println("9 para borrar TORNEO");
+		System.out.println("10 para borrar JUGADORXPERIODOXMAPAXSERVIDOR");
+		System.out.println("11 para borrar JUGADORXRAZA");
+		System.out.println("12 para borrar JUGADORXSERVIDOR");
+		System.out.println("13 para borrar JUGADORXTORNEO");
+		System.out.println("14 para borrar JUGADORXLOGRO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;

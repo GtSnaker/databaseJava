@@ -21,6 +21,11 @@ public class CrearTablas {
 		System.out.println("7 para crear RAZA");
 		System.out.println("8 para crear SERVIDOR");
 		System.out.println("9 para crear TORNEO");
+		System.out.println("10 para crear JUGADORXPERIODOXMAPAXSERVIDOR");
+		System.out.println("11 para crear JUGADORXRAZA");
+		System.out.println("12 para crear JUGADORXSERVIDOR");
+		System.out.println("13 para crear JUGADORXTORNEO");
+		System.out.println("14 para crear JUGADORXLOGRO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;

@@ -66,8 +66,8 @@ public class JugadorXPeriodoXMapaXServidorDAO {
 				jugadores.add(new JugadorXPeriodoXMapaXServidorVO(res.getInt("idJugador"), res
 						.getInt("idMapa"), res
 						.getInt("idServidor"), res
-						.getDate("incio"),res
-						.getDate("fin"),res
+						.getString("inicio"),res
+						.getString("fin"),res
 						.getInt("ganador")
 						));
 			}

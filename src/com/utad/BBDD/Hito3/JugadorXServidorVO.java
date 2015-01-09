@@ -20,7 +20,7 @@ public class JugadorXServidorVO {
 		fin = null;
 	}
 
-	public JugadorXServidorVO(int idJugador, int idServidor, Date inicio, Date fin) {
+	public JugadorXServidorVO(int idJugador, int idServidor, String inicio, String fin) {
 		super();
 		this.idJugador = idJugador;
 		this.idServidor = idServidor;

@@ -24,6 +24,11 @@ public class VerTablas {
 		System.out.println("7 para ver las tablas de RAZA");
 		System.out.println("8 para ver las tablas de SERVIDOR");
 		System.out.println("9 para ver las tablas de TORNEO");
+		System.out.println("10 para ver las tablas de JUGADORXPERIODOXMAPAXSERVIDOR");
+		System.out.println("11 para ver las tablas de JUGADORXRAZA");
+		System.out.println("12 para ver las tablas de JUGADORXSERVIDOR");
+		System.out.println("13 para ver las tablas de JUGADORXTORNEO");
+		System.out.println("14 para ver las tablas de JUGADORXLOGRO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;

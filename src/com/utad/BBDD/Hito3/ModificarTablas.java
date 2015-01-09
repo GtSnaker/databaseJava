@@ -15,6 +15,11 @@ public class ModificarTablas {
 		System.out.println("7 para modificar RAZA");
 		System.out.println("8 para modificar SERVIDOR");
 		System.out.println("9 para modificar TORNEO");
+		System.out.println("10 para modificar JUGADORXPERIODOXMAPAXSERVIDOR");
+		System.out.println("11 para modificar JUGADORXRAZA");
+		System.out.println("12 para modificar JUGADORXSERVIDOR");
+		System.out.println("13 para modificar JUGADORXTORNEO");
+		System.out.println("14 para modificar JUGADORXLOGRO");
 		Scanner sc = new Scanner(System.in);
 		String numero = sc.nextLine();
 		int opcion;

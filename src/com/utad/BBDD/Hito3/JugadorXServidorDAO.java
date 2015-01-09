@@ -64,8 +64,8 @@ public class JugadorXServidorDAO {
 			while (res.next()) {
 				jugadores.add(new JugadorXServidorVO(res.getInt("idJugador"), res
 						.getInt("IdServidor"), res
-						.getDate("inicio"), res
-						.getDate("fin")
+						.getString("inicio"), res
+						.getString("fin")
 						));
 			}
 			res.close();
