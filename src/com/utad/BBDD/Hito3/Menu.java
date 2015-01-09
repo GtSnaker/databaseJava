@@ -36,6 +36,7 @@ public class Menu {
 						VerTablas.elegir(connection);
 						break;
 					case 2:
+						ConsultaRapida.tablaVictoriasDerrotas(connection);
 						break;
 					case 3:
 						CrearTablas.elegir(connection);		
@@ -47,7 +48,7 @@ public class Menu {
 						ModificarTablas.elegir(connection);
 						break;
 					case 6:
-						
+						Procedimientos.elegir(connection);
 						break;
 					case 7:
 						System.out.println("Buenas noches, bendisiones :)");

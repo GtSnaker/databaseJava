@@ -76,7 +76,8 @@ public class VerTablas {
 			System.out.println("Introduce un numero por favor...");
 		}
 	}
-
+	
+	
 	public static void verJugador(DbConnection connection)
 			throws ClassNotFoundException, SQLException {
 		JugadorDAO miJugadorDAO = new JugadorDAO();
