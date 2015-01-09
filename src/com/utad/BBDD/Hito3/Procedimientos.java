@@ -6,6 +6,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import ENUMs.Raza;
+import PROCs.JugadorXRazaPROC;
+import PROCs.JugadoresXServidorPROC;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 

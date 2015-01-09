@@ -3,8 +3,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
+
+import _Tablas.BorrarTablas;
+import _Tablas.CrearTablas;
+import _Tablas.ModificarTablas;
+import _Tablas.VerTablas;
+
 import com.mysql.jdbc.Statement;
+
 import java.util.Scanner;
 import java.sql.Date;
 
@@ -36,6 +44,7 @@ public class Menu {
 						VerTablas.elegir(connection);
 						break;
 					case 2:
+						System.out.println("Fallos en las consultas rapidas...");
 						break;
 					case 3:
 						CrearTablas.elegir(connection);		
