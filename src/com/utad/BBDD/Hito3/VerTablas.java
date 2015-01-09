@@ -63,17 +63,22 @@ public class VerTablas {
 					VerTablas.verServidor(connection);
 					break;
 				case 9:
-					VerTablas.verTorneo(connection);
+					VerTablas.verJugadorXPeriodoXMapaXServidor(connection);
 					break;
 				case 10:
+					VerTablas.verJugadorXRaza(connection);
 					break;
 				case 11:
+					VerTablas.verJugadorXServidor(connection);
 					break;
 				case 12:
+					VerTablas.verTorneo(connection);
 					break;
 				case 13:
+					VerTablas.verTorneo(connection);
 					break;
 				case 14:
+					VerTablas.verTorneo(connection);
 					break;
 				}
 			}
@@ -288,6 +293,31 @@ public class VerTablas {
 						+ ", IdServidor: " + miJugadorXServidor.getIdServidor()
 						+ ", Inicio: " + miJugadorXServidor.getInicio()
 						+ ", Fin:" + miJugadorXServidor.getFin()
+						);
+			}
+			System.out.println("");
+		} else {
+			System.out.println("No se pudo consultar.");
+		}
+		
+		
+	}
+	
+	public static void verJugadorXRaza(DbConnection connection)
+			throws ClassNotFoundException, SQLException {
+		JugadorXRazaDAO miJugadorXRazaDAO = new JugadorXRazaDAO();
+		JugadorXRazaVO miJugadorXRaza;
+		ArrayList<JugadorXRazaVO> jugadores = miJugadorXRazaDAO
+				.ver(connection);
+		if (jugadores.size() > 0) {
+			for (int i = 0; i < jugadores.size(); i++) {
+				Raza miRaza = miJugadorXRaza.getRaza();
+				String nombre = valueof(miRaza);
+				miJugadorXRaza = jugadores.get(i);
+				System.out.println("Id: " + miJugadorXRaza.getId()
+						+ ", Nombre: " + nombre
+						+ ", Ganadas: " + miJugadorXRaza.getGanadas()
+						+ ", Perdidas:" + miJugadorXRaza.getPerdidas()
 						);
 			}
 			System.out.println("");
