@@ -36,7 +36,6 @@ public class Menu {
 						VerTablas.elegir(connection);
 						break;
 					case 2:
-						ConsultaRapida.tablaVictoriasDerrotas(connection);
 						break;
 					case 3:
 						CrearTablas.elegir(connection);		
