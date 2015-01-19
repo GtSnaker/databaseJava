@@ -127,7 +127,7 @@ public class CrearTablas {
 		miJugadorVO.setNombre(sc.nextLine());
 		System.out.println("Introduce el apellido");
 		miJugadorVO.setApellido(sc.nextLine());
-		System.out.println("Introduce la edad: YY-MM-DD HH24:MM:SS");
+		System.out.println("Introduce la edad: YYYY-MM-DD");
 		miJugadorVO.setEdad(sc.nextLine());
 		System.out.println("Introduce el pais");
 		miJugadorVO.setPais(sc.nextLine());
@@ -137,7 +137,7 @@ public class CrearTablas {
 		miJugadorVO.setBattletag(sc.nextLine());
 		System.out.println("Introduce el password");
 		miJugadorVO.setPassword(sc.nextLine());
-		System.out.println("Introduce la liga");
+		System.out.println("Introduce la liga (id)");
 		miJugadorVO.setLiga(Integer.parseInt(sc.nextLine()));
 		miJugadorDAO.registrar(miJugadorVO, connection);
 	}

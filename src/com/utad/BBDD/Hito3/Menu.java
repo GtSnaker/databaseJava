@@ -44,7 +44,7 @@ public class Menu {
 						VerTablas.elegir(connection);
 						break;
 					case 2:
-						System.out.println("Fallos en las consultas rapidas...");
+						ConsultasRapidas.elegir(connection);
 						break;
 					case 3:
 						CrearTablas.elegir(connection);		
